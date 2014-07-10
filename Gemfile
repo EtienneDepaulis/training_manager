@@ -9,6 +9,8 @@ gem 'jbuilder', '~> 2.0'
 
 gem 'active_model_serializers'
 
+gem "rack-cors", :require => "rack/cors"
+
 
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
