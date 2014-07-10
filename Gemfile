@@ -7,6 +7,8 @@ gem 'pg'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
+gem 'active_model_serializers'
+
 
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
@@ -22,6 +24,8 @@ group :development, :test do
 end
 
 group :test do
+	gem 'rack-test'
 	gem 'factory_girl_rails'
+	gem 'database_cleaner'
 	gem 'shoulda-matchers', require: false
 end

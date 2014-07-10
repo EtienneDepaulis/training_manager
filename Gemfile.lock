@@ -14,6 +14,8 @@ GEM
       activesupport (= 4.1.4)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.8.1)
+      activemodel (>= 3.0)
     activemodel (4.1.4)
       activesupport (= 4.1.4)
       builder (~> 3.1)
@@ -29,6 +31,7 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     builder (3.2.2)
+    database_cleaner (1.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     factory_girl (4.4.0)
@@ -115,9 +118,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
+  database_cleaner
   factory_girl_rails
   jbuilder (~> 2.0)
   pg
+  rack-test
   rails (= 4.1.4)
   rspec-rails (~> 3.0.0)
   sdoc (~> 0.4.0)
