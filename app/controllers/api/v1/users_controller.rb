@@ -4,6 +4,10 @@ class Api::V1::UsersController < Api::V1::BaseController
 		respond_with User.all
 	end
 
+	def create
+		respond_with :api, :v1, User.create(user_params)
+	end
+
 	def show
 		respond_with user
 	end

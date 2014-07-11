@@ -29,6 +29,18 @@ RSpec.describe '/api/v1/users', type: :api do
 		end
 	end
 
+	context 'create' do
+		it "creates a user" do
+			post "#{url}.json", user: { name: 'Stéphane' }
+
+			expect(last_response.status).to eq 201
+
+			user = JSON.parse(last_response.body)
+
+			expect(user["user"]["name"]).to eq "Stéphane"
+		end
+	end
+
 	context 'update' do
 		it "updates a user" do
 			patch "#{url}/#{user.id}.json", user: { name: 'Stéphane' }
