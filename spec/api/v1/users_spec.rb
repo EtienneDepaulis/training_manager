@@ -38,4 +38,12 @@ RSpec.describe '/api/v1/users', type: :api do
 			expect(user.reload.name).to eq "Stéphane"
 		end
 	end
+
+	context 'destroy' do
+		it "destroys a user" do
+			delete "#{url}/#{user.id}.json"
+
+			expect(last_response.status).to eq 204
+		end
+	end
 end
