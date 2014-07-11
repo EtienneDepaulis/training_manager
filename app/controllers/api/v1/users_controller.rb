@@ -8,8 +8,16 @@ class Api::V1::UsersController < Api::V1::BaseController
 		respond_with user
 	end
 
+	def update
+    respond_with user.update(user_params)
+  end
+
 	private
 		def user
 			User.find(params[:id])
 		end
+
+		def user_params
+    	params.require(:user).permit(:name, :email, :phone)
+  	end
 end

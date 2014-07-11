@@ -28,4 +28,14 @@ RSpec.describe '/api/v1/users', type: :api do
 			expect(user["user"]["name"]).to eq "Etienne"
 		end
 	end
+
+	context 'update' do
+		it "updates a user" do
+			patch "#{url}/#{user.id}.json", user: { name: 'Stéphane' }
+
+			expect(last_response.status).to eq 204
+
+			expect(user.reload.name).to eq "Stéphane"
+		end
+	end
 end
