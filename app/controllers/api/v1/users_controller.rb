@@ -5,7 +5,12 @@ class Api::V1::UsersController < Api::V1::BaseController
 	end
 
 	def create
-		respond_with :api, :v1, User.create(user_params)
+		@user = User.new(user_params)
+		if @user.save
+			respond_with :api, :v1, User.create(user_params)
+		else
+			render json: { errors: { base: @user.errors.full_messages } }, status: 422
+		end
 	end
 
 	def show
@@ -13,7 +18,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 	end
 
 	def update
-    respond_with user.update(user_params)
+		if user.update(user_params)
+      respond_with @user
+    else
+      render json: { errors: { base: @user.errors.full_messages } }, status: 422
+    end
   end
 
   def destroy
@@ -23,7 +32,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
 	private
 		def user
-			User.find(params[:id])
+			@user = User.find(params[:id])
 		end
 
 		def user_params

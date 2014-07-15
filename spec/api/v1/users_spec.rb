@@ -39,6 +39,17 @@ RSpec.describe '/api/v1/users', type: :api do
 
 			expect(user["user"]["name"]).to eq "Stéphane"
 		end
+
+		it "raises an error" do
+			post "#{url}.json", user: { name: '' }
+
+			expect(last_response.status).to eq 422
+
+			response = JSON.parse(last_response.body)
+
+			expect(response["errors"]["base"]).to eq ["Name can't be blank"]
+
+		end
 	end
 
 	context 'update' do
@@ -48,6 +59,16 @@ RSpec.describe '/api/v1/users', type: :api do
 			expect(last_response.status).to eq 204
 
 			expect(user.reload.name).to eq "Stéphane"
+		end
+
+		it "raises an error" do
+			patch "#{url}/#{user.id}.json", user: { name: '' }
+
+			expect(last_response.status).to eq 422
+
+			response = JSON.parse(last_response.body)
+
+			expect(response["errors"]["base"]).to eq ["Name can't be blank"]
 		end
 	end
 
