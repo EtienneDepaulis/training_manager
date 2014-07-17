@@ -11,6 +11,7 @@ gem 'active_model_serializers'
 
 gem "rack-cors", :require => "rack/cors"
 
+gem 'rails-i18n', '~> 4.0.0'
 
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.

@@ -47,7 +47,7 @@ RSpec.describe '/api/v1/users', type: :api do
 
 			response = JSON.parse(last_response.body)
 
-			expect(response["errors"]["base"]).to eq ["Name can't be blank"]
+			expect(response["errors"]["name"]).to eq ["doit être rempli(e)"]
 
 		end
 	end
@@ -68,7 +68,7 @@ RSpec.describe '/api/v1/users', type: :api do
 
 			response = JSON.parse(last_response.body)
 
-			expect(response["errors"]["base"]).to eq ["Name can't be blank"]
+			expect(response["errors"]["name"]).to eq ["doit être rempli(e)"]
 		end
 	end
 

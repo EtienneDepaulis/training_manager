@@ -9,7 +9,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 		if @user.save
 			respond_with :api, :v1, User.create(user_params)
 		else
-			render json: { errors: { base: @user.errors.full_messages } }, status: 422
+			render json: { errors: @user.errors.messages }, status: 422
 		end
 	end
 
@@ -21,7 +21,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 		if user.update(user_params)
       respond_with @user
     else
-      render json: { errors: { base: @user.errors.full_messages } }, status: 422
+      render json: { errors: @user.errors.messages }, status: 422
     end
   end
 
