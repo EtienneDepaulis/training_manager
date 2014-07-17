@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710130045) do
+ActiveRecord::Schema.define(version: 20140717134941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "pg_trgm"
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "groups", ["parent_id"], name: "index_groups_on_parent_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -24,6 +33,9 @@ ActiveRecord::Schema.define(version: 20140710130045) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "group_id"
   end
+
+  add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
 
 end

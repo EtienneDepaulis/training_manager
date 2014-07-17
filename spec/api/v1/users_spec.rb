@@ -30,8 +30,10 @@ RSpec.describe '/api/v1/users', type: :api do
 	end
 
 	context 'create' do
+		let(:group) { create :group }
+
 		it "creates a user" do
-			post "#{url}.json", user: { name: 'Stéphane' }
+			post "#{url}.json", user: { name: 'Stéphane', group_id: group.id }
 
 			expect(last_response.status).to eq 201
 

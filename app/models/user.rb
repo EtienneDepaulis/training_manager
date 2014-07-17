@@ -1,3 +1,5 @@
 class User < ActiveRecord::Base
-	validates_presence_of :name
+	belongs_to :group
+
+	validates_presence_of :name, :group
 end
