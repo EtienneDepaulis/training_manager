@@ -6,6 +6,8 @@ RSpec.describe '/api/v1/groups', type: :api do
 	let!(:group) { create :group, name: "N4" }
 
 	context 'index' do
+		let!(:children) { create :group, parent: group }
+
 		it "lists groups" do
 			get "#{url}.json"
 
@@ -14,6 +16,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 			groups = JSON.parse(last_response.body)
 
 			expect(groups["groups"].first["name"]).to eq "N4"
+			expect(groups["groups"].first["children"].size).to eq 1
 		end
 	end
 
@@ -30,14 +33,17 @@ RSpec.describe '/api/v1/groups', type: :api do
 	end
 
 	context 'create' do
+		let(:parent) { create :group, name: "N3" }
+
 		it "creates a group" do
-			post "#{url}.json", group: { name: 'N3' }
+			post "#{url}.json", group: { name: 'N3+', parent_id: parent.id }
 
 			expect(last_response.status).to eq 201
 
 			group = JSON.parse(last_response.body)
 
-			expect(group["group"]["name"]).to eq "N3"
+			expect(group["group"]["name"]).to eq "N3+"
+			expect(group["group"]["parent"]["name"]).to eq "N3"
 		end
 
 		it "raises an error" do
