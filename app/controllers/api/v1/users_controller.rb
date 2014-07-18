@@ -1,7 +1,11 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
 	def index
-		respond_with User.all
+		if group_id = params[:group_id]
+			respond_with Group.find(group_id).users
+		else
+			respond_with User.all
+		end
 	end
 
 	def create

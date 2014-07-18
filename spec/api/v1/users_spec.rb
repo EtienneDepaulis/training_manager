@@ -15,6 +15,22 @@ RSpec.describe '/api/v1/users', type: :api do
 
 			expect(users["users"].first["name"]).to eq "Etienne"
 		end
+
+		context 'filtering' do
+			let(:group) { create :group }
+			let!(:other_user) { create :user, name: "Marc", group: group }
+
+			it "filters users on group_id" do
+				get "#{url}.json", group_id: group.id
+
+				expect(last_response.status).to eq 200
+
+				users = JSON.parse(last_response.body)
+
+				expect(users["users"].first["name"]).to eq "Marc"
+				expect(users["users"].size).to eq 1
+			end
+		end
 	end
 
 	context 'show' do
@@ -55,12 +71,22 @@ RSpec.describe '/api/v1/users', type: :api do
 	end
 
 	context 'update' do
+		let(:group) { create :group }
+
 		it "updates a user" do
 			patch "#{url}/#{user.id}.json", user: { name: 'Stéphane' }
 
 			expect(last_response.status).to eq 204
 
 			expect(user.reload.name).to eq "Stéphane"
+		end
+
+		it "updates a user's group" do
+			patch "#{url}/#{user.id}.json", user: { group_id: group.id }
+
+			expect(last_response.status).to eq 204
+
+			expect(user.reload.group).to eq group
 		end
 
 		it "raises an error" do
