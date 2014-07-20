@@ -23,4 +23,10 @@ FactoryGirl.define do
     association             :group
     association             :training_session
   end
+
+  factory :invitation do
+    association             :user
+    association             :training_session
+    status                  "pending"
+  end
 end
