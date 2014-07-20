@@ -12,4 +12,10 @@ FactoryGirl.define do
   factory :location do
   	sequence(:name)  		{|i| "location ##{i}"}
   end
+
+  factory :training_session do
+    association         :location
+    sequence(:name)     {|i| "training_session ##{i}"}
+    started_at          Date.today
+  end
 end

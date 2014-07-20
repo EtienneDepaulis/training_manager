@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users, except: [:new, :edit]
       resources :groups, except: [:new, :edit]
       resources :locations, except: [:new, :edit]
+      resources :training_sessions, except: [:new, :edit]
     end
   end
 
