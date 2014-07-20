@@ -11,12 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140720200751) do
+ActiveRecord::Schema.define(version: 20140720203729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "pg_trgm"
+
+  create_table "allowances", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "training_session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "allowances", ["group_id"], name: "index_allowances_on_group_id", using: :btree
+  add_index "allowances", ["training_session_id"], name: "index_allowances_on_training_session_id", using: :btree
 
   create_table "groups", force: true do |t|
     t.string   "name"
