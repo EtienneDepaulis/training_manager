@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :create, :show, :update, :destroy]
-      resources :groups, only: [:index, :create, :show, :update, :destroy]
+      resources :users, except: [:new, :edit]
+      resources :groups, except: [:new, :edit]
+      resources :locations, except: [:new, :edit]
     end
   end
 

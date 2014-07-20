@@ -8,4 +8,8 @@ FactoryGirl.define do
   factory :group do
   	sequence(:name)  		{|i| "group ##{i}"}
   end
+
+  factory :location do
+  	sequence(:name)  		{|i| "location ##{i}"}
+  end
 end
