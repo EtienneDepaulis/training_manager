@@ -8,7 +8,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'index' do
 		it "lists training_sessions" do
-			get "#{url}.json", token: user.token
+			getWithAuth "#{url}.json", token: user.token
 
 			expect(last_response.status).to eq 200
 
@@ -20,7 +20,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'show' do
 		it "shows a training_session" do
-			get "#{url}/#{training_session.id}.json", token: user.token
+			getWithAuth "#{url}/#{training_session.id}.json", token: user.token
 
 			expect(last_response.status).to eq 200
 
@@ -34,7 +34,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		let(:location) { create :location }
 
 		it "creates a training_session" do
-			post "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id }, token: user.token
+			postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id }, token: user.token
 
 			expect(last_response.status).to eq 201
 
@@ -44,7 +44,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		end
 
 		it "raises an error" do
-			post "#{url}.json", training_session: { started_at: "2014-08-01 18:30:00" }, token: user.token
+			postWithAuth "#{url}.json", training_session: { started_at: "2014-08-01 18:30:00" }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -57,7 +57,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'update' do
 		it "updates a training_session" do
-			patch "#{url}/#{training_session.id}.json", training_session: { started_at: Time.new(2014,7,1,19,30) }, token: user.token
+			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: Time.new(2014,7,1,19,30) }, token: user.token
 
 			expect(last_response.status).to eq 204
 
@@ -65,7 +65,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		end
 
 		it "raises an error" do
-			patch "#{url}/#{training_session.id}.json", training_session: { started_at: nil }, token: user.token
+			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: nil }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -77,7 +77,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'destroy' do
 		it "destroys a training_session" do
-			delete "#{url}/#{training_session.id}.json", token: user.token
+			deleteWithAuth "#{url}/#{training_session.id}.json", token: user.token
 
 			expect(last_response.status).to eq 204
 		end

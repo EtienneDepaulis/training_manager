@@ -5,35 +5,35 @@ RSpec.describe '/api/v1/users', type: :api do
 	let(:url) { "/api/v1/users" }
 	let!(:user) { create :user, name: "Etienne" }
 
-	context 'index' do
-		it "lists users" do
-			get "#{url}.json", token: user.token
-
-			expect(last_response.status).to eq 200
-
-			users = JSON.parse(last_response.body)
-
-			expect(users["users"].first["name"]).to eq "Etienne"
-		end
-
-		context 'filtering' do
-			let(:group) { create :group }
-			let!(:other_user) { create :user, name: "Marc", group: group }
-
-			it "filters users on group_id" do
-				get "#{url}.json", group_id: group.id, token: user.token
+	context 'being authenticated' do
+		context 'index' do
+			it "lists users" do
+				getWithAuth "#{url}.json"
 
 				expect(last_response.status).to eq 200
 
 				users = JSON.parse(last_response.body)
 
-				expect(users["users"].first["name"]).to eq "Marc"
-				expect(users["users"].size).to eq 1
+				expect(users["users"].first["name"]).to eq "Etienne"
+			end
+
+			context 'filtering' do
+				let(:group) { create :group }
+				let!(:other_user) { create :user, name: "Marc", group: group }
+
+				it "filters users on group_id" do
+					getWithAuth "#{url}.json", group_id: group.id
+
+					expect(last_response.status).to eq 200
+
+					users = JSON.parse(last_response.body)
+
+					expect(users["users"].first["name"]).to eq "Marc"
+					expect(users["users"].size).to eq 1
+				end
 			end
 		end
-	end
 
-	context 'being authenticated' do
 		context 'show' do
 			it "shows a user" do
 				get "#{url}/#{user.id}.json"
@@ -50,7 +50,7 @@ RSpec.describe '/api/v1/users', type: :api do
 			let(:group) { create :group }
 
 			it "creates a user" do
-				post "#{url}.json", user: { name: 'Stéphane', group_id: group.id }, token: user.token
+				postWithAuth "#{url}.json", user: { name: 'Stéphane', group_id: group.id }
 
 				expect(last_response.status).to eq 201
 
@@ -61,12 +61,12 @@ RSpec.describe '/api/v1/users', type: :api do
 
 			it "creates only one user" do
 				expect{
-					post "#{url}.json", user: { name: 'Stéphane', group_id: group.id }, token: user.token
+					postWithAuth "#{url}.json", user: { name: 'Stéphane', group_id: group.id }
 					}.to change(User, :count).by(1)
 			end
 
 			it "raises an error" do
-				post "#{url}.json", user: { name: '' }, token: user.token
+				postWithAuth "#{url}.json", user: { name: '' }
 
 				expect(last_response.status).to eq 422
 
@@ -81,7 +81,7 @@ RSpec.describe '/api/v1/users', type: :api do
 			let(:group) { create :group }
 
 			it "updates a user" do
-				patch "#{url}/#{user.id}.json", user: { name: 'Stéphane' }, token: user.token
+				patchWithAuth "#{url}/#{user.id}.json", user: { name: 'Stéphane' }
 
 				expect(last_response.status).to eq 204
 
@@ -89,7 +89,7 @@ RSpec.describe '/api/v1/users', type: :api do
 			end
 
 			it "updates a user's group" do
-				patch "#{url}/#{user.id}.json", user: { group_id: group.id }, token: user.token
+				patchWithAuth "#{url}/#{user.id}.json", user: { group_id: group.id }
 
 				expect(last_response.status).to eq 204
 
@@ -97,7 +97,7 @@ RSpec.describe '/api/v1/users', type: :api do
 			end
 
 			it "raises an error" do
-				patch "#{url}/#{user.id}.json", user: { name: '' }, token: user.token
+				patchWithAuth "#{url}/#{user.id}.json", user: { name: '' }
 
 				expect(last_response.status).to eq 422
 
@@ -109,7 +109,7 @@ RSpec.describe '/api/v1/users', type: :api do
 
 		context 'destroy' do
 			it "destroys a user" do
-				delete "#{url}/#{user.id}.json", token: user.token
+				deleteWithAuth "#{url}/#{user.id}.json"
 
 				expect(last_response.status).to eq 204
 			end
