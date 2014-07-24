@@ -12,4 +12,11 @@ RSpec.describe User, type: :model do
 	it "has a valid factory" do
 		expect(build(:user)).to be_valid
 	end
+
+	context 'token creation' do
+		let(:group) { create :group }
+		it "creates a token" do
+			expect(group.users.create(name: "Etienne").token).not_to be_blank
+		end
+	end
 end

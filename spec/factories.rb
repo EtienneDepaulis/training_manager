@@ -3,6 +3,7 @@ FactoryGirl.define do
     association             :group
     sequence(:name)  		    {|i| "user ##{i}"}
     sequence(:email)        {|i| "user-#{i}@gmail.com"}
+    sequence(:token)        {|i| "token ##{i}"}
   end
 
   factory :group do

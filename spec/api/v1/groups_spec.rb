@@ -4,6 +4,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	let(:url) { "/api/v1/groups" }
 	let!(:group) { create :group, name: "N4" }
+	let!(:user) { create :user }
 
 	context 'index' do
 		it "lists groups" do
@@ -19,7 +20,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'show' do
 		it "shows a group" do
-			get "#{url}/#{group.id}.json"
+			get "#{url}/#{group.id}.json", token: user.token
 
 			expect(last_response.status).to eq 200
 
@@ -33,7 +34,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		let(:parent) { create :group, name: "N3" }
 
 		it "creates a group" do
-			post "#{url}.json", group: { name: 'N3+', parent_id: parent.id }
+			post "#{url}.json", group: { name: 'N3+', parent_id: parent.id }, token: user.token
 
 			expect(last_response.status).to eq 201
 
@@ -44,7 +45,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		end
 
 		it "raises an error" do
-			post "#{url}.json", group: { name: '' }
+			post "#{url}.json", group: { name: '' }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -57,7 +58,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'update' do
 		it "updates a group" do
-			patch "#{url}/#{group.id}.json", group: { name: 'N4+' }
+			patch "#{url}/#{group.id}.json", group: { name: 'N4+' }, token: user.token
 
 			expect(last_response.status).to eq 204
 
@@ -65,7 +66,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		end
 
 		it "raises an error" do
-			patch "#{url}/#{group.id}.json", group: { name: '' }
+			patch "#{url}/#{group.id}.json", group: { name: '' }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -77,7 +78,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'destroy' do
 		it "destroys a group" do
-			delete "#{url}/#{group.id}.json"
+			delete "#{url}/#{group.id}.json", token: user.token
 
 			expect(last_response.status).to eq 204
 		end

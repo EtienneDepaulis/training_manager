@@ -4,10 +4,11 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	let(:url) { "/api/v1/locations" }
 	let!(:location) { create :location, name: "Piscine" }
+	let!(:user) { create :user }
 
 	context 'index' do
 		it "lists locations" do
-			get "#{url}.json"
+			get "#{url}.json", token: user.token
 
 			expect(last_response.status).to eq 200
 
@@ -19,7 +20,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	context 'show' do
 		it "shows a location" do
-			get "#{url}/#{location.id}.json"
+			get "#{url}/#{location.id}.json", token: user.token
 
 			expect(last_response.status).to eq 200
 
@@ -31,7 +32,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	context 'create' do
 		it "creates a location" do
-			post "#{url}.json", location: { name: 'Club' }
+			post "#{url}.json", location: { name: 'Club' }, token: user.token
 
 			expect(last_response.status).to eq 201
 
@@ -41,7 +42,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 		end
 
 		it "raises an error" do
-			post "#{url}.json", location: { name: '' }
+			post "#{url}.json", location: { name: '' }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -54,7 +55,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	context 'update' do
 		it "updates a location" do
-			patch "#{url}/#{location.id}.json", location: { name: 'Salle de muscu' }
+			patch "#{url}/#{location.id}.json", location: { name: 'Salle de muscu' }, token: user.token
 
 			expect(last_response.status).to eq 204
 
@@ -62,7 +63,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 		end
 
 		it "raises an error" do
-			patch "#{url}/#{location.id}.json", location: { name: '' }
+			patch "#{url}/#{location.id}.json", location: { name: '' }, token: user.token
 
 			expect(last_response.status).to eq 422
 
@@ -74,7 +75,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	context 'destroy' do
 		it "destroys a location" do
-			delete "#{url}/#{location.id}.json"
+			delete "#{url}/#{location.id}.json", token: user.token
 
 			expect(last_response.status).to eq 204
 		end

@@ -1,5 +1,7 @@
 class Api::V1::GroupsController < Api::V1::BaseController
 
+	before_filter :authenticate_user!, except: [:index]
+
 	def index
 		respond_with Group.all
 	end
