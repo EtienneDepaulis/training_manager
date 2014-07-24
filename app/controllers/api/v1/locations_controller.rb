@@ -7,7 +7,7 @@ class Api::V1::LocationsController < Api::V1::BaseController
 	def create
 		@location = Location.new(location_params)
 		if @location.save
-			respond_with :api, :v1, Location.create(location_params)
+			respond_with :api, :v1, @location
 		else
 			render json: { errors: @location.errors.messages }, status: 422
 		end

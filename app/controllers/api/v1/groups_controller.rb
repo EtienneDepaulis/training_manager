@@ -7,7 +7,7 @@ class Api::V1::GroupsController < Api::V1::BaseController
 	def create
 		@group = Group.new(group_params)
 		if @group.save
-			respond_with :api, :v1, Group.create(group_params)
+			respond_with :api, :v1, @group
 		else
 			render json: { errors: @group.errors.messages }, status: 422
 		end

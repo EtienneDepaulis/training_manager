@@ -11,7 +11,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 	def create
 		@user = User.new(user_params)
 		if @user.save
-			respond_with :api, :v1, User.create(user_params)
+			respond_with :api, :v1, @user
 		else
 			render json: { errors: @user.errors.messages }, status: 422
 		end

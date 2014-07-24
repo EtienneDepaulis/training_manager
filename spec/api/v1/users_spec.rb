@@ -58,6 +58,13 @@ RSpec.describe '/api/v1/users', type: :api do
 			expect(user["user"]["name"]).to eq "Stéphane"
 		end
 
+		it "creates only one user" do
+			expect{
+				post "#{url}.json", user: { name: 'Stéphane', group_id: group.id }
+				}.to change(User, :count).by(1)
+
+		end
+
 		it "raises an error" do
 			post "#{url}.json", user: { name: '' }
 

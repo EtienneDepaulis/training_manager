@@ -7,7 +7,7 @@ class Api::V1::TrainingSessionsController < Api::V1::BaseController
 	def create
 		@training_session = TrainingSession.new(training_session_params)
 		if @training_session.save
-			respond_with :api, :v1, TrainingSession.create(training_session_params)
+			respond_with :api, :v1, @training_session
 		else
 			render json: { errors: @training_session.errors.messages }, status: 422
 		end
