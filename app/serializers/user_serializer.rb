@@ -3,5 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   attributes :id, :name, :phone, :email
 
-  has_one :group
+  has_one :group, serializer: GroupShortSerializer
 end

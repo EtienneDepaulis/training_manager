@@ -5,4 +5,6 @@ class GroupSerializer < ActiveModel::Serializer
 
   # has_one :parent, serializer: ParentSerializer
   # has_many :children
+
+  has_many :users, serializer: UserShortSerializer
 end
