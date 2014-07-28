@@ -32,15 +32,22 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'create' do
 		let(:location) { create :location }
+		let(:group) { create :group }
 
 		it "creates a training_session" do
-			postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id }, token: user.token
+			postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id }
 
 			expect(last_response.status).to eq 201
 
 			training_session = JSON.parse(last_response.body)
 
 			expect(training_session["training_session"]["location_id"]).to eq location.id
+		end
+
+		it "creates a training_session and its allowances" do
+			expect{
+				postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id, allowances_attributes: [{group_id: group.id}] }
+			}.to change(Allowance, :count).by(1)
 		end
 
 		it "raises an error" do
