@@ -1,7 +1,7 @@
 class TrainingSession < ActiveRecord::Base
   belongs_to :location
 
-  has_many :allowances
+  has_many :allowances, dependent: :destroy
   has_many :groups, through: :allowances
 
 	has_many :invitations, dependent: :destroy

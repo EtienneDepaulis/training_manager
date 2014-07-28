@@ -6,7 +6,7 @@ RSpec.describe Group, type: :model do
 	it { is_expected.to belong_to(:parent) }
 	it { is_expected.to have_many(:children) }
 
-	it { is_expected.to have_many(:allowances) }
+	it { is_expected.to have_many(:allowances).dependent(:destroy) }
 	it { is_expected.to have_many(:training_sessions) }
 
 	it "has a valid factory" do
