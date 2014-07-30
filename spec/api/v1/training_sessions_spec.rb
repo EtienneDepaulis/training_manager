@@ -46,7 +46,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 		it "creates a training_session and its allowances" do
 			expect{
-				postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id, allowances_attributes: [{group_id: group.id}] }
+				postWithAuth "#{url}.json", training_session: { started_at: Time.new(2014,8,1,18,30), location_id: location.id, allowances_attributes: [{group_id: group.id, training_session_id: nil}] }
 			}.to change(Allowance, :count).by(1)
 		end
 
@@ -64,11 +64,19 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'update' do
 		it "updates a training_session" do
-			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: Time.new(2014,7,1,19,30) }, token: user.token
+			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: Time.new(2014,7,1,19,30) }
 
 			expect(last_response.status).to eq 204
 
 			expect(training_session.reload.started_at).to eq Time.new(2014,7,1,19,30)
+		end
+
+		it "deletes an allowance" do
+			allowance = create :allowance, training_session: training_session
+
+			expect{
+				patchWithAuth "#{url}/#{training_session.id}.json", training_session: {allowances_attributes: [{id: allowance.id, _destroy: 1}] }
+			}.to change(Allowance, :count).by(-1)
 		end
 
 		it "raises an error" do
