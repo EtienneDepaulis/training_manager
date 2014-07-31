@@ -28,12 +28,10 @@ class User < ActiveRecord::Base
 			current_training_sessions = training_sessions.reload
 			futur_training_sessions = group.training_sessions
 
-			(futur_training_sessions - current_training_sessions).each do |training_session|
-				invitation = training_session.invitations.create(user: self, status: "pending")
-			end
+			training_sessions_to_add = futur_training_sessions - current_training_sessions
+			self.training_sessions << training_sessions_to_add
 
-			(current_training_sessions - futur_training_sessions).each do |training_session|
-				Invitation.where(training_session: training_session, user: self).destroy_all
-			end
+			training_sessions_to_remove = current_training_sessions - futur_training_sessions
+			self.invitations.where(training_session: training_sessions_to_remove).destroy_all
 		end
 end
