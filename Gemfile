@@ -13,6 +13,8 @@ gem "rack-cors", :require => "rack/cors"
 
 gem 'rails-i18n', '~> 4.0.0'
 
+gem 'newrelic_rpm'
+
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
 	gem 'sdoc', '~> 0.4.0'
