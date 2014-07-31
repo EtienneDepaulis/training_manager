@@ -21,6 +21,8 @@ module TrainingManager
 
     config.i18n.default_locale = :fr
 
+    config.assets.enabled = false
+
     config.middleware.use Rack::Cors do
       allow do
         origins "*"
