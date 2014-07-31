@@ -4,7 +4,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	let(:url) { "/api/v1/groups" }
 	let!(:group) { create :group, name: "N4" }
-	let!(:user) { create :user }
+	let!(:user) { create :user, group: group }
 
 	context 'index' do
 		it "lists groups" do
@@ -16,6 +16,18 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 			expect(groups["groups"].first["name"]).to eq "N4"
 		end
+
+		# it "restrict to top level group only" do
+		# 	create :group, parent: group
+
+		# 	getWithAuth "#{url}.json?top_level_only=true"
+
+		# 	groups = JSON.parse(last_response.body)
+
+		# 	puts groups
+
+		# 	expect(groups["groups"].size).to eq 1
+		# end
 	end
 
 	context 'show' do

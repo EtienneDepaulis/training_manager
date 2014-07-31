@@ -7,4 +7,6 @@ class Group < ActiveRecord::Base
   has_many :training_sessions, through: :allowances
 
   validates_presence_of :name
+
+  scope :top_level_only, ->{ where(parent_id: nil) }
 end
