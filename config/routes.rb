@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       resources :groups, except: [:new, :edit]
       resources :locations, except: [:new, :edit]
       resources :training_sessions, except: [:new, :edit]
+
+      resources :invitations, only: [:index, :show, :update]
     end
   end
 

@@ -32,7 +32,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'show' do
 		it "shows a group" do
-			getWithAuth "#{url}/#{group.id}.json", token: user.token
+			getWithAuth "#{url}/#{group.id}.json"
 
 			expect(last_response.status).to eq 200
 
@@ -46,7 +46,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		let(:parent) { create :group, name: "N3" }
 
 		it "creates a group" do
-			postWithAuth "#{url}.json", group: { name: 'N3+', parent_id: parent.id }, token: user.token
+			postWithAuth "#{url}.json", group: { name: 'N3+', parent_id: parent.id }
 
 			expect(last_response.status).to eq 201
 
@@ -57,7 +57,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		end
 
 		it "raises an error" do
-			postWithAuth "#{url}.json", group: { name: '' }, token: user.token
+			postWithAuth "#{url}.json", group: { name: '' }
 
 			expect(last_response.status).to eq 422
 
@@ -70,7 +70,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'update' do
 		it "updates a group" do
-			patchWithAuth "#{url}/#{group.id}.json", group: { name: 'N4+' }, token: user.token
+			patchWithAuth "#{url}/#{group.id}.json", group: { name: 'N4+' }
 
 			expect(last_response.status).to eq 204
 
@@ -78,7 +78,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 		end
 
 		it "raises an error" do
-			patchWithAuth "#{url}/#{group.id}.json", group: { name: '' }, token: user.token
+			patchWithAuth "#{url}/#{group.id}.json", group: { name: '' }
 
 			expect(last_response.status).to eq 422
 
@@ -90,7 +90,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	context 'destroy' do
 		it "destroys a group" do
-			deleteWithAuth "#{url}/#{group.id}.json", token: user.token
+			deleteWithAuth "#{url}/#{group.id}.json"
 
 			expect(last_response.status).to eq 204
 		end

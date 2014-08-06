@@ -8,8 +8,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'index' do
 		it "lists training_sessions" do
-			getWithAuth "#{url}.json", token: user.token
-
+			getWithAuth "#{url}.json"
 			expect(last_response.status).to eq 200
 
 			training_sessions = JSON.parse(last_response.body)
@@ -20,8 +19,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'show' do
 		it "shows a training_session" do
-			getWithAuth "#{url}/#{training_session.id}.json", token: user.token
-
+			getWithAuth "#{url}/#{training_session.id}.json"
 			expect(last_response.status).to eq 200
 
 			result = JSON.parse(last_response.body)
@@ -51,8 +49,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		end
 
 		it "raises an error" do
-			postWithAuth "#{url}.json", training_session: { started_at: "2014-08-01 18:30:00" }, token: user.token
-
+			postWithAuth "#{url}.json", training_session: { started_at: "2014-08-01 18:30:00" }
 			expect(last_response.status).to eq 422
 
 			response = JSON.parse(last_response.body)
@@ -80,8 +77,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		end
 
 		it "raises an error" do
-			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: nil }, token: user.token
-
+			patchWithAuth "#{url}/#{training_session.id}.json", training_session: { started_at: nil }
 			expect(last_response.status).to eq 422
 
 			response = JSON.parse(last_response.body)
@@ -92,8 +88,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	context 'destroy' do
 		it "destroys a training_session" do
-			deleteWithAuth "#{url}/#{training_session.id}.json", token: user.token
-
+			deleteWithAuth "#{url}/#{training_session.id}.json"
 			expect(last_response.status).to eq 204
 		end
 	end
