@@ -28,6 +28,5 @@ FactoryGirl.define do
   factory :invitation do
     association             :user
     association             :training_session
-    status                  "pending"
   end
 end

@@ -14,6 +14,6 @@ guard :rspec, cmd:"spring rspec" do
   watch('config/routes.rb')                           { "spec/routing" }
   watch('app/controllers/application_controller.rb')  { "spec/controllers" }
 
-  watch('app/controllers/api/v([0-9]+)/base_controller.rb')  { |m| "spec/api/v#{m[1]}/" }
+  watch(%r{^app/controllers/api/v([0-9]+)/base_controller.rb$})  { |m| "spec/api/v#{m[1]}/" }
 end
 

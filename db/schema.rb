@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724114549) do
+ActiveRecord::Schema.define(version: 20140813165818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+  enable_extension "pg_trgm"
 
   create_table "allowances", force: true do |t|
     t.integer  "group_id"
@@ -36,11 +38,12 @@ ActiveRecord::Schema.define(version: 20140724114549) do
   add_index "groups", ["parent_id"], name: "index_groups_on_parent_id", using: :btree
 
   create_table "invitations", force: true do |t|
-    t.string   "status"
     t.integer  "user_id"
     t.integer  "training_session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_answered",         default: false
+    t.boolean  "is_confirmed",        default: false
   end
 
   add_index "invitations", ["training_session_id"], name: "index_invitations_on_training_session_id", using: :btree

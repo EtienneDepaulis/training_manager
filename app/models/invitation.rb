@@ -1,17 +1,23 @@
 class Invitation < ActiveRecord::Base
 
-	AVAILABLE_STATUS = ["pending", "confirmed", "declined"]
-
   belongs_to :user
   belongs_to :training_session
 
   validates_presence_of :user, :training_session
-  validates_inclusion_of :status, in: AVAILABLE_STATUS
 
-  after_initialize :set_default_status
+  after_initialize :set_default_values
+  after_save :notify_answer
 
   private
-  	def set_default_status
-  		self.status = status || AVAILABLE_STATUS.first
+  	def set_default_values
+  		self.is_confirmed   = is_confirmed  || false
+      self.is_answered    = is_answered   || false
   	end
+
+    def notify_answer
+      return if is_answered?
+      return unless is_confirmed_changed?
+
+      self.update_attribute(:is_answered, true)
+    end
 end

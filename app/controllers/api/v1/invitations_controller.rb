@@ -24,6 +24,6 @@ class Api::V1::InvitationsController < Api::V1::BaseController
 		end
 
 		def invitation_params
-    	params.require(:invitation).permit(:status)
+    	params.require(:invitation).permit(:is_confirmed)
   	end
 end
