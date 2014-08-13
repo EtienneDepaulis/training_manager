@@ -5,6 +5,8 @@ class Invitation < ActiveRecord::Base
 
   validates_presence_of :user, :training_session
 
+  scope :for_user, ->(user) { where(user: user) }
+
   after_initialize :set_default_values
   after_save :notify_answer
 

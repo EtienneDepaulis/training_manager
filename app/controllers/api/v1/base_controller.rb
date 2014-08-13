@@ -6,7 +6,7 @@ class Api::V1::BaseController < ApplicationController
 	rescue_from NotAuthorizedError, with: :user_not_authorized
 
 	def authenticate_user!
-		 raise NotAuthorizedError unless authenticate_token
+		raise NotAuthorizedError unless authenticate_token
 	end
 
 	def user_not_authorized
@@ -14,11 +14,15 @@ class Api::V1::BaseController < ApplicationController
 		render json: { errors: "No token provided." }, status: 401
 	end
 
+	def current_user
+		@current_user
+	end
+
 	private
 		def authenticate_token
 
     	authenticate_with_http_token do |token, options|
-				User.exists?(token: token)
+				@current_user = User.find_by(token: token)
 			end
  		end
 end
