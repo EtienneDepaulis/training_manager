@@ -30,6 +30,21 @@ RSpec.describe '/api/v1/groups', type: :api do
 		# end
 	end
 
+	context 'filtering on ids' do
+		let!(:other_group) { create :group }
+
+		it "filters groups on id" do
+			getWithAuth "#{url}.json", ids: [other_group.id]
+
+			expect(last_response.status).to eq 200
+
+			groups = JSON.parse(last_response.body)
+
+			expect(groups["groups"].first["id"]).to eq other_group.id
+			expect(groups["groups"].size).to eq 1
+		end
+	end
+
 	context 'show' do
 		it "shows a group" do
 			getWithAuth "#{url}/#{group.id}.json"

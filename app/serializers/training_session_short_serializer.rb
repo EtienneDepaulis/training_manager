@@ -1,5 +1,5 @@
 class TrainingSessionShortSerializer < ActiveModel::Serializer
-	embed :ids, include: true
+	embed :ids
 
   attributes :id, :description, :started_at
 

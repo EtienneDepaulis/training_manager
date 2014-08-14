@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
-	embed :ids, include: true
+	embed :ids
 
   attributes :id, :name, :phone, :email, :token
 
-  has_one :group, serializer: GroupShortSerializer
+  has_one :group
 end

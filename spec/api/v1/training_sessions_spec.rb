@@ -17,6 +17,21 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 		end
 	end
 
+	context 'filtering on ids' do
+		let!(:other_training_session) { create :training_session }
+
+		it "filters training_sessions on id" do
+			getWithAuth "#{url}.json", ids: [other_training_session.id]
+
+			expect(last_response.status).to eq 200
+
+			training_sessions = JSON.parse(last_response.body)
+
+			expect(training_sessions["training_sessions"].first["id"]).to eq other_training_session.id
+			expect(training_sessions["training_sessions"].size).to eq 1
+		end
+	end
+
 	context 'show' do
 		it "shows a training_session" do
 			getWithAuth "#{url}/#{training_session.id}.json"

@@ -28,6 +28,21 @@ RSpec.describe '/api/v1/invitations', type: :api do
 		end
 	end
 
+	context 'filtering on ids' do
+		let!(:other_invitation) { create :invitation, user: user }
+
+		it "filters invitations on id" do
+			getWithAuth "#{url}.json", ids: [other_invitation.id]
+
+			expect(last_response.status).to eq 200
+
+			invitations = JSON.parse(last_response.body)
+
+			expect(invitations["invitations"].first["id"]).to eq other_invitation.id
+			expect(invitations["invitations"].size).to eq 1
+		end
+	end
+
 	context 'show' do
 		it "shows a invitation" do
 			getWithAuth "#{url}/#{invitation.id}.json"

@@ -1,4 +1,7 @@
 class TrainingSession < ActiveRecord::Base
+
+	include Filterable
+
   belongs_to :location
 
   has_many :allowances, dependent: :destroy, inverse_of: :training_session

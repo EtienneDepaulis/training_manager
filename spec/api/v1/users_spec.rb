@@ -17,12 +17,11 @@ RSpec.describe '/api/v1/users', type: :api do
 				expect(users["users"].first["name"]).to eq "Etienne"
 			end
 
-			context 'filtering' do
-				let(:group) { create :group }
-				let!(:other_user) { create :user, name: "Marc", group: group }
+			context 'filtering on ids' do
+				let!(:other_user) { create :user, name: "Marc" }
 
-				it "filters users on group_id" do
-					getWithAuth "#{url}.json", group_id: group.id
+				it "filters users on id" do
+					getWithAuth "#{url}.json", ids: [other_user.id]
 
 					expect(last_response.status).to eq 200
 

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :training_sessions, except: [:new, :edit]
 
       resources :invitations, only: [:index, :show, :update]
+      resources :allowances, only: [:index, :show]
     end
   end
 

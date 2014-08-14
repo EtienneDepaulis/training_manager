@@ -1,4 +1,7 @@
 class Allowance < ActiveRecord::Base
+
+  include Filterable
+
   belongs_to :group
   belongs_to :training_session, inverse_of: :allowances
 
@@ -9,7 +12,9 @@ class Allowance < ActiveRecord::Base
 
   private
   	def create_invitations
-  		training_session.users << group.users
+      group.users.each do |user|
+        training_session.invitations.create(user: user)
+      end
   	end
 
   	def destroy_invitations

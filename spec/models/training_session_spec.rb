@@ -15,4 +15,34 @@ RSpec.describe TrainingSession, type: :model do
 	it "has a valid factory" do
 		expect(build(:training_session)).to be_valid
 	end
+
+	context 'creating a training_session' do
+		let(:group) 						{ create :group }
+		let!(:user_1) 					{ create :user, group: group }
+		let!(:user_2) 					{ create :user, group: group }
+		let!(:user_3) 					{ create :user, group: group }
+		let(:training_session) 	{ create :training_session }
+
+		it "creates the invitations" do
+			expect{
+				training_session.groups << group
+			}.to change(user_1.invitations, :count).by(1)
+		end
+
+		it "creates the invitations" do
+
+			another_training_session = build :training_session
+
+			params = {
+				started_at: another_training_session.started_at,
+				location: another_training_session.location,
+				allowances_attributes: [
+					{_destroy: false, training_session: nil, group_id: group.id}
+				]
+			}
+			expect{
+				TrainingSession.create(params)
+			}.to change(user_1.invitations, :count).by(1)
+		end
+	end
 end

@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+	include Filterable
+
 	belongs_to :group
 
 	has_many :invitations, dependent: :destroy

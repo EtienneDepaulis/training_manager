@@ -18,6 +18,21 @@ RSpec.describe '/api/v1/locations', type: :api do
 		end
 	end
 
+	context 'filtering on ids' do
+		let!(:other_location) { create :location }
+
+		it "filters locations on id" do
+			getWithAuth "#{url}.json", ids: [other_location.id]
+
+			expect(last_response.status).to eq 200
+
+			locations = JSON.parse(last_response.body)
+
+			expect(locations["locations"].first["id"]).to eq other_location.id
+			expect(locations["locations"].size).to eq 1
+		end
+	end
+
 	context 'show' do
 		it "shows a location" do
 			getWithAuth "#{url}/#{location.id}.json"

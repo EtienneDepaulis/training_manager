@@ -1,9 +1,9 @@
 class GroupSerializer < ActiveModel::Serializer
-	embed :ids, include: true
+	embed :ids
 
-  attributes :id, :name, :parent_id, :child_ids
+  attributes :id, :name
 
-  # has_one :parent, serializer: ParentSerializer
-  #has_many :children, serializer: GroupShortSerializer
-  has_many :users, serializer: UserShortSerializer
+  has_one :parent
+  has_many :children
+  has_many :users
 end
