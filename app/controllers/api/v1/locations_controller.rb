@@ -1,6 +1,7 @@
 class Api::V1::LocationsController < Api::V1::BaseController
 
 	before_filter :authenticate_user!
+	before_filter :authenticate_admin!, only: [:create, :update, :destroy]
 
 	def index
 		respond_with Location.only_ids(params[:ids])

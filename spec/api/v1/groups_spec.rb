@@ -4,7 +4,7 @@ RSpec.describe '/api/v1/groups', type: :api do
 
 	let(:url) { "/api/v1/groups" }
 	let!(:group) { create :group, name: "N4" }
-	let!(:user) { create :user, group: group }
+	let!(:user) { create :admin_user, group: group }
 
 	context 'index' do
 		it "lists groups" do

@@ -4,7 +4,7 @@ RSpec.describe '/api/v1/locations', type: :api do
 
 	let(:url) { "/api/v1/locations" }
 	let!(:location) { create :location, name: "Piscine" }
-	let!(:user) { create :user }
+	let!(:user) { create :admin_user }
 
 	context 'index' do
 		it "lists locations" do

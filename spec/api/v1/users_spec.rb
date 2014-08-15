@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe '/api/v1/users', type: :api do
 
 	let(:url) { "/api/v1/users" }
-	let!(:user) { create :user, name: "Etienne" }
+	let!(:user) { create :admin_user, name: "Etienne" }
 
-	context 'being authenticated' do
+	context 'being authenticated as an admin user' do
 		context 'index' do
 			it "lists users" do
 				getWithAuth "#{url}.json"
@@ -112,6 +112,16 @@ RSpec.describe '/api/v1/users', type: :api do
 
 				expect(last_response.status).to eq 204
 			end
+		end
+	end
+
+	context 'being authenticated as a normal user' do
+		let!(:user) { create :user }
+		let(:group) { create :group }
+
+		it "creates a user" do
+			postWithAuth "#{url}.json", user: { name: 'Stéphane', group_id: group.id }
+			expect(last_response.status).to eq 401
 		end
 	end
 

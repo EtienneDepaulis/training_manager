@@ -4,7 +4,7 @@ RSpec.describe '/api/v1/training_sessions', type: :api do
 
 	let(:url) { "/api/v1/training_sessions" }
 	let!(:training_session) { create :training_session, started_at: Time.new(2014,7,1,18,30) }
-	let!(:user) { create :user }
+	let!(:user) { create :admin_user }
 
 	context 'index' do
 		it "lists training_sessions" do

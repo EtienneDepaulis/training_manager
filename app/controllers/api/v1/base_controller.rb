@@ -9,6 +9,10 @@ class Api::V1::BaseController < ApplicationController
 		raise NotAuthorizedError unless authenticate_token
 	end
 
+	def authenticate_admin!
+		raise NotAuthorizedError unless current_user.is_admin?
+	end
+
 	def user_not_authorized
 		self.headers['WWW-Authenticate'] = 'Token realm="Application"'
 		render json: { errors: "No token provided." }, status: 401
@@ -20,7 +24,6 @@ class Api::V1::BaseController < ApplicationController
 
 	private
 		def authenticate_token
-
     	authenticate_with_http_token do |token, options|
 				@current_user = User.find_by(token: token)
 			end

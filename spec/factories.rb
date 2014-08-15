@@ -4,6 +4,10 @@ FactoryGirl.define do
     sequence(:name)  		    {|i| "user ##{i}"}
     sequence(:email)        {|i| "user-#{i}@gmail.com"}
     sequence(:token)        {|i| "token ##{i}"}
+
+    factory :admin_user do
+      is_admin              true
+    end
   end
 
   factory :group do

@@ -13,6 +13,12 @@ RSpec.describe User, type: :model do
 		expect(build(:user)).to be_valid
 	end
 
+	it "has a valid admin factory" do
+		admin_user = build(:admin_user)
+		expect(admin_user).to be_valid
+		expect(admin_user.is_admin?).to be_truthy
+	end
+
 	context 'token creation' do
 		let(:group) { create :group }
 		it "creates a token" do

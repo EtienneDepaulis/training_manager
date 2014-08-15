@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
 	before_filter :authenticate_user!, except: [:show]
+	before_filter :authenticate_admin!, only: [:create, :update, :destroy]
 
 	def index
 		respond_with User.only_ids(params[:ids])
