@@ -11,6 +11,14 @@ RSpec.describe Invitation, type: :model do
 		expect(build(:invitation)).to be_valid
 	end
 
+	context 'data coherence' do
+		it "validates [:user, :training_session] uniqueness" do
+			invitation = create :invitation
+
+			expect(build(:invitation, user: invitation.user, training_session: invitation.training_session)).not_to be_valid
+		end
+	end
+
 	context 'default values' do
 		it "isn't answered" do
 			expect(build(:invitation).is_answered?).to be_falsy

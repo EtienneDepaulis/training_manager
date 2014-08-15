@@ -6,6 +6,7 @@ class Allowance < ActiveRecord::Base
   belongs_to :training_session, inverse_of: :allowances
 
   validates_presence_of :group, :training_session
+  validates_uniqueness_of :training_session, scope: :group
 
   after_create :create_invitations
   after_destroy :destroy_invitations

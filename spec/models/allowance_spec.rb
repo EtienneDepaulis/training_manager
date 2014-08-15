@@ -11,6 +11,14 @@ RSpec.describe Allowance, type: :model do
 		expect(build(:allowance)).to be_valid
 	end
 
+	context 'data coherence' do
+		it "validates [:group, :training_session] uniqueness" do
+			allowance = create :allowance
+
+			expect(build(:allowance, group: allowance.group, training_session: allowance.training_session)).not_to be_valid
+		end
+	end
+
 	context 'invitations management' do
 		context 'on create' do
 			before(:each) do

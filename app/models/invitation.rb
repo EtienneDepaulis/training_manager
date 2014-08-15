@@ -6,6 +6,7 @@ class Invitation < ActiveRecord::Base
   belongs_to :training_session
 
   validates_presence_of :user, :training_session
+  validates_uniqueness_of :training_session, scope: :user
 
   scope :for_user, ->(user) { where(user: user) }
 
