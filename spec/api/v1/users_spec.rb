@@ -125,14 +125,4 @@ RSpec.describe '/api/v1/users', type: :api do
 		end
 	end
 
-	context 'not being authenticated' do
-		context 'index' do
-			it "renders a 401" do
-				get "#{url}.json"
-				expect(last_response.status).to eq 401
-			end
-		end
-	end
-
-
 end

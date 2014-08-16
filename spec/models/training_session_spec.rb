@@ -45,4 +45,21 @@ RSpec.describe TrainingSession, type: :model do
 			}.to change(user_1.invitations, :count).by(1)
 		end
 	end
+
+	context 'counters' do
+		let(:training_session) { create :training_session }
+
+		before(:each) do
+		  create :invitation, training_session: training_session, is_confirmed: true
+		  create :invitation, training_session: training_session, is_confirmed: true
+		  create :invitation, training_session: training_session, is_confirmed: false, is_answered: true
+		  create :invitation, training_session: training_session
+		end
+
+		it "knows about the number of attendes" do
+			expect(training_session.is_expected_counter).to eq 2
+			expect(training_session.is_not_expected_counter).to eq 1
+			expect(training_session.has_not_answered_counter).to eq 1
+		end
+	end
 end

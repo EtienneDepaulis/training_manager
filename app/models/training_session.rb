@@ -12,4 +12,17 @@ class TrainingSession < ActiveRecord::Base
   has_many :users, through: :invitations
 
   validates_presence_of :location, :started_at
+
+  def is_expected_counter
+  	invitations.coming.count
+  end
+
+  def is_not_expected_counter
+  	invitations.not_coming.count
+  end
+
+  def has_not_answered_counter
+  	invitations.has_not_answered.count
+  end
+
 end
