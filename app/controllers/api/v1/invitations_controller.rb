@@ -3,7 +3,7 @@ class Api::V1::InvitationsController < Api::V1::BaseController
 	before_filter :authenticate_user!
 
 	def index
-		respond_with Invitation.for_user(current_user).only_ids(params[:ids])
+		respond_with Invitation.only_ids(params[:ids])
 	end
 
 	def show

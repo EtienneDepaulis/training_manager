@@ -4,7 +4,7 @@ class Api::V1::TrainingSessionsController < Api::V1::BaseController
 	before_filter :authenticate_admin!, only: [:create, :update, :destroy]
 
 	def index
-		respond_with TrainingSession.only_ids(params[:ids])
+		respond_with TrainingSession.only_ids(params[:ids]).order("started_at ASC")
 	end
 
 	def create

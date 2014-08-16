@@ -4,7 +4,7 @@ class Api::V1::GroupsController < Api::V1::BaseController
 	before_filter :authenticate_admin!, only: [:create, :update, :destroy]
 
 	def index
-		respond_with Group.only_ids(params[:ids])
+		respond_with Group.only_ids(params[:ids]).order("name ASC")
 	end
 
 	def create

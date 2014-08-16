@@ -16,16 +16,6 @@ RSpec.describe '/api/v1/invitations', type: :api do
 
 			expect(invitations["invitations"].first["user_id"]).to eq user.id
 		end
-
-		it "list only the user's invitations" do
-			create :invitation
-
-			getWithAuth "#{url}.json"
-
-			invitations = JSON.parse(last_response.body)
-
-			expect(invitations["invitations"].size).to eq 1
-		end
 	end
 
 	context 'filtering on ids' do
