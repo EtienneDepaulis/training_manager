@@ -10,6 +10,15 @@ class Group < ActiveRecord::Base
   has_many :training_sessions, through: :allowances
 
   validates_presence_of :name
+  validate :parent_validation
 
   scope :top_level_only, ->{ where(parent_id: nil) }
+
+  private
+
+ 		def parent_validation
+ 			return if parent.nil?
+
+ 			errors.add(:parent, "L'équipe parente ne peut être elle même.") if self == parent
+ 		end
 end

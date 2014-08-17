@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
 
   include Filterable
 
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :training_session
 
   validates_presence_of :user, :training_session

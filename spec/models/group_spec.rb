@@ -12,4 +12,13 @@ RSpec.describe Group, type: :model do
 	it "has a valid factory" do
 		expect(build(:group)).to be_valid
 	end
+
+	context 'when assigning parent' do
+		let(:group) { create :group }
+
+		it "can't assign itself as parent" do
+			group.parent = group
+			expect(group).not_to be_valid
+		end
+	end
 end
