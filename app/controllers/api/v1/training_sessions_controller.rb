@@ -39,6 +39,6 @@ class Api::V1::TrainingSessionsController < Api::V1::BaseController
 		end
 
 		def training_session_params
-    	params.require(:training_session).permit(:description, :started_at, :location_id, allowances_attributes: [:id, :group_id, "_destroy"])
+    	params.require(:training_session).permit(:description, :started_at, :location_id, allowances_attributes: [:id, :group_id, :training_session_id, "_destroy"])
   	end
 end
