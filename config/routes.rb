@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :api do
     namespace :v1 do
       resources :users, except: [:new, :edit]
@@ -10,5 +11,7 @@ Rails.application.routes.draw do
       resources :allowances, only: [:index, :show]
     end
   end
+
+  get '/users/:token/invitations', to: 'invitations#index', as: :user_invitations
 
 end

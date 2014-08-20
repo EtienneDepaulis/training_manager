@@ -17,6 +17,8 @@ gem 'newrelic_rpm'
 
 gem 'airbrake'
 
+gem 'icalendar'
+
 group :doc do
 	# bundle exec rake doc:rails generates the API under doc/api.
 	gem 'sdoc', '~> 0.4.0'
