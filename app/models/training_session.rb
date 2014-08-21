@@ -13,6 +13,8 @@ class TrainingSession < ActiveRecord::Base
 
   validates_presence_of :location, :started_at
 
+  scope :in_the_past, ->{ where("started_at < ?", Date.today) }
+
   def is_expected_counter
   	invitations.coming.count
   end
