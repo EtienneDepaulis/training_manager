@@ -4,5 +4,5 @@ class InvitationSerializer < ActiveModel::Serializer
   attributes :id, :is_confirmed, :is_answered
 
   has_one :training_session
-  has_one :user
+  has_one :user, include: true
 end

@@ -6,5 +6,5 @@ class TrainingSessionSerializer < ActiveModel::Serializer
   has_one :location
   has_many :groups
   has_many :allowances
-  has_many :invitations
+  has_many :invitations, include: true
 end
