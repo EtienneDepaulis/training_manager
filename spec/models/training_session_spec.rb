@@ -62,4 +62,14 @@ RSpec.describe TrainingSession, type: :model do
 			expect(training_session.has_not_answered_counter).to eq 1
 		end
 	end
+
+	context 'cleaning old training sessions' do
+		let!(:training_session) { create :training_session, started_at: 2.days.from_now }
+		let!(:old_training_session) { create :training_session, started_at: 2.days.ago }
+
+		it "selects old training sessions" do
+			expect(TrainingSession.in_the_past).to eq([old_training_session])
+		end
+
+	end
 end
