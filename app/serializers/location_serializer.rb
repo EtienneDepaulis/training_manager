@@ -3,5 +3,5 @@ class LocationSerializer < ActiveModel::Serializer
 
   attributes :id, :name
 
-  has_many :training_sessions
+  has_many :training_sessions, include: true
 end

@@ -5,5 +5,5 @@ class GroupSerializer < ActiveModel::Serializer
 
   has_one :parent
   has_many :children
-  has_many :users
+  has_many :users, include: true
 end
