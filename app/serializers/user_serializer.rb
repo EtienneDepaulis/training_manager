@@ -5,4 +5,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_one :group
   has_many :invitations, include: true
+  has_many :training_sessions, include: true
 end
