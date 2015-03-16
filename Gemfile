@@ -1,13 +1,15 @@
 source 'https://rubygems.org'
 ruby '2.2.1'
 
-gem 'rails', '4.1.4'
+gem 'rails', '4.2.0'
 gem 'pg'
+
+gem 'responders', '~> 2.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~>0.9.3'
 
 gem "rack-cors", require: "rack/cors"
 

@@ -1,8 +1,6 @@
 class AllowanceSerializer < ActiveModel::Serializer
-	embed :ids
+  attributes :id, :group_id, :training_session_id
 
-  attributes :id
-
-  has_one :group
-  has_one :training_session
+  # has_one :group
+  # has_one :training_session
 end
