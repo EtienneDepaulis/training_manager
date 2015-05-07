@@ -11,6 +11,10 @@ class Allowance < ActiveRecord::Base
   after_create :create_invitations
   after_destroy :destroy_invitations
 
+  def to_s
+    name
+  end
+
   private
   	def create_invitations
       group.users.each do |user|

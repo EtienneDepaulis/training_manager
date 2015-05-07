@@ -12,6 +12,10 @@ class User < ActiveRecord::Base
 	before_create :set_token
 	after_save :manage_invitations
 
+	def to_s
+		name
+	end
+
 	private
 		def set_token
 			return if token.present?

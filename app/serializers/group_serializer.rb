@@ -1,7 +1,5 @@
 class GroupSerializer < ActiveModel::Serializer
-  attributes :id, :name, :parent_id
+  attributes :id, :name
 
-  #has_one :parent
-  has_many :children
-  has_many :users
+  #has_many :users
 end

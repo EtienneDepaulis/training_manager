@@ -15,6 +15,10 @@ class TrainingSession < ActiveRecord::Base
 
   scope :in_the_past, ->{ where("started_at < ?", Date.today) }
 
+  def to_s
+    I18n.l started_at, format: :long
+  end
+
   def is_expected_counter
   	invitations.coming.count
   end

@@ -14,6 +14,10 @@ class Group < ActiveRecord::Base
 
   scope :top_level_only, ->{ where(parent_id: nil) }
 
+  def to_s
+    name
+  end
+
   private
 
  		def parent_validation

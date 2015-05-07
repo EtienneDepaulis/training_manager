@@ -14,4 +14,15 @@ Rails.application.routes.draw do
 
   get '/users/:token/invitations', to: 'invitations#index', as: :user_invitations
 
+  namespace :admin do
+    resources :users
+    resources :training_sessions
+  end
+
+  resources :training_sessions, only: [:show]
+
+  resources :sessions, only: [:new, :create, :destroy]
+
+  root to: 'training_sessions#index'
+
 end
