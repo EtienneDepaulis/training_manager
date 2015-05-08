@@ -7,4 +7,4 @@
 //= require select2
 //= require select2/select2_locale_fr
 
-//= require training_sessions
+//= require invitations

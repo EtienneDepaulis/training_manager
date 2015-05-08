@@ -36,6 +36,9 @@ gem 'airbrake'
 
 gem 'icalendar'
 
+# Forms
+gem 'simple_form'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0'

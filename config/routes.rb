@@ -12,7 +12,9 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/users/:token/invitations', to: 'invitations#index', as: :user_invitations
+  namespace :users do
+    get '/:token/invitations', to: 'invitations#index', as: :user_invitations
+  end
 
   namespace :admin do
     resources :users
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :training_sessions, only: [:show]
-
+  resources :invitations, only: [:update]
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'training_sessions#index'

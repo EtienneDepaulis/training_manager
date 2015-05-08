@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    redirect_to new_session_path, alert: "Vous n'êtes pas autorisé à accéder à cette page."
+    redirect_to new_session_path
   end
 
   private

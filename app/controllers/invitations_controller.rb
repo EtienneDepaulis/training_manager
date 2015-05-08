@@ -1,19 +1,13 @@
 class InvitationsController < ApplicationController
 
-	def index
-		invitations = current_user.invitations
+	def update
+    @invitation = current_user.invitations.find params[:id]
+    @invitation.update_attributes invitation_params
+  end
 
-		respond_to do |format|
-    	format.json { render json: invitations }
-    	format.ics do
-	      calendar = ConvertToIcs.call(invitations)
-	      render text: calendar.to_ical
-    	end
-  	end
-	end
+  private
 
-	private
-		def current_user
-			User.find_by(token: params[:token])
-		end
+    def invitation_params
+      params.require(:invitation).permit(:is_confirmed)
+    end
 end
