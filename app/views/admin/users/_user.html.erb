@@ -1,0 +1,8 @@
+<li id="<%= dom_id(user) %>">
+  <%= link_to admin_user_path(user) do %>
+    <span class="label label-default pull-right">
+      <%= user.group %>
+    </span>
+    <%= user %>
+  <% end %>
+</li>
