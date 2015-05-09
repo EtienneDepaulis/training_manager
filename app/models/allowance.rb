@@ -12,7 +12,7 @@ class Allowance < ActiveRecord::Base
   after_destroy :destroy_invitations
 
   def to_s
-    name
+    group.to_s
   end
 
   private

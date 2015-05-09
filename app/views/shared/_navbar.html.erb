@@ -16,16 +16,18 @@
         </li>
       </ul>
 
+      <% if user_signed_in? && current_user.is_admin? %>
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? && current_user.is_admin? %>
-          <li>
-            <%= link_to admin_users_path do %>
-              <span class="glyphicon glyphicon-wrench"></span>
-              Configuration
-            <% end %>
-          </li>
-        <% end %>
+
+        <li>
+          <%= link_to admin_users_path do %>
+            <span class="glyphicon glyphicon-user"></span>
+            Poloïstes
+          <% end %>
+        </li>
+
       </ul>
+      <% end %>
     </div><!--/.nav-collapse -->
   </div>
 </div>

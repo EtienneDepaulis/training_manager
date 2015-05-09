@@ -1,29 +1,22 @@
-<ul class="nav nav-pills">
-  <li>
-    <%= link_to "Poloïstes", admin_users_path %>
-  </li>
-</ul>
+<div class="page-header">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Poloïstes</h2>
+    </div>
 
-<hr />
-
-<div class="row">
-
-  <div class="col-md-4">
-    <ul class="nav nav-pills nav-stacked">
-      <%= render @users %>
-    </ul>
-
-    <hr />
-
-    <%= link_to new_admin_user_path, class: "btn btn-primary" do %>
-    <span class="glyphicon glyphicon-plus"></span>
-        Ajouter
-    <% end %>
-
-    <hr />
-  </div>
-
-  <div id="user" class="col-md-8">
+    <div class="col-md-4">
+      <h2>
+        <%= link_to new_admin_user_path, class: "btn btn-primary pull-right-md pull-right-lg" do %>
+          <span class="glyphicon glyphicon-plus"></span>
+          Ajouter
+        <% end %>
+      </h2>
+    </div>
   </div>
 
 </div>
+
+<div id="users" class="row-striped">
+  <%= render @users %>
+</div>
+

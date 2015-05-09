@@ -20,7 +20,7 @@ class Admin::UsersController  < Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to @user, notice: 'utilisateur créé.'
+      redirect_to admin_users_path, notice: 'Utilisateur créé.'
     else
       render action: 'new'
     end
@@ -29,7 +29,7 @@ class Admin::UsersController  < Admin::ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'Utilisateur modifié.'
+      redirect_to admin_users_path, notice: 'Utilisateur modifié.'
     else
       render action: 'edit'
     end

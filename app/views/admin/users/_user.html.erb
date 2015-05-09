@@ -1,8 +1,45 @@
-<li id="<%= dom_id(user) %>">
-  <%= link_to admin_user_path(user) do %>
-    <span class="label label-default pull-right">
-      <%= user.group %>
-    </span>
-    <%= user %>
-  <% end %>
-</li>
+<div id="<%= dom_id(user) %>" class="row row-user">
+	<div class="col-sm-2">
+		<%= user %>
+	</div>
+	<div class="col-sm-2">
+		<span class="label label-default">
+			<%= user.group %>
+		</span>
+	</div>
+
+	<div class="col-sm-5">
+		<% unless user.phone.blank? %>
+			<a href="sms:<%= user.phone %>" class="btn-group"/>
+				<button type="button" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-phone"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-xs"><%= user.phone %></button>
+			</a>
+		<% end %>
+
+		<% unless user.email.blank? %>
+			<a href="mailto:<%= user.email %>" class="btn-group"/>
+				<button type="button" class="btn btn-success btn-xs">
+					<span class="glyphicon glyphicon-send"></span>
+				</button>
+				<button type="button" class="btn btn-default btn-xs"><%= user.email %></button>
+			</a>
+		<% end %>
+	</div>
+
+	<div class="col-sm-3 col-actions">
+		<%= link_to admin_user_path(user), method: :delete, data: {confirm: "Êtes-vous certain ?"}, class: "btn btn-danger btn-xs pull-right-md pull-right-lg" do %>
+	  	<span class="glyphicon glyphicon-remove"></span>
+	    supprimer
+	  <% end %>
+
+		<%= link_to edit_admin_user_path(user), class: "btn btn-default btn-xs pull-right-md pull-right-lg" do %>
+	  	<span class="glyphicon glyphicon-pencil"></span>
+	    modifier
+	  <% end %>
+
+
+
+	</div>
+</div>

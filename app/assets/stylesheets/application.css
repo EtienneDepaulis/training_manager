@@ -7,50 +7,32 @@
  *= require_self
  */
 
- html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
+ /* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
   min-height: 100%;
-  height: 100%;
 }
-#wrap {
-  height: auto !important;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
-}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
 
-#wrap > .container-fluid {
-  padding-top: 70px;
+  padding-top: 30px;
 }
-
-#footer .credit {
-  margin: 20px 0;
-  color: #999999;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
   height: 60px;
-}
-#footer {
   background-color: #f5f5f5;
 }
 
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+.footer p {
+  line-height: 60px;
+  margin-bottom: 0;
 }
+
 
 /* https://github.com/Natshah/bootstrap-pull */
 
@@ -68,4 +50,68 @@ body {
 
 div.center {
   text-align: center;
+}
+
+.pull-right-not-xs, .pull-right-not-sm, .pull-right-not-md, .pull-right-not-lg{
+  float: right;
+}
+
+.pull-left-not-xs, .pull-left-not-sm, .pull-left-not-md, .pull-left-not-lg{
+  float: left;
+}
+@media (max-width: 767px) {
+  .pull-right-not-xs, .pull-left-not-xs{
+    float: none;
+  }
+  .pull-right-xs {
+    float: right;
+  }
+  .pull-left-xs {
+    float: left;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .pull-right-not-sm, .pull-left-not-sm{
+    float: none;
+  }
+  .pull-right-sm {
+    float: right;
+  }
+  .pull-left-sm {
+    float: left;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .pull-right-not-md, .pull-left-not-md{
+    float: none;
+  }
+  .pull-right-md {
+    float: right;
+  }
+  .pull-left-md {
+    float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .pull-right-not-lg, .pull-left-not-lg{
+    float: none;
+  }
+  .pull-right-lg {
+    float: right;
+  }
+  .pull-left-lg {
+    float: left;
+  }
+}
+
+.row-user {
+  padding: 10px 0;
+}
+
+.row-striped > div.row:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.col-actions .btn {
+  margin-right: 5px;
 }
