@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users, except: :show
+    resources :locations, except: [:show, :destroy]
+    resources :groups, except: [:show, :destroy]
     resources :training_sessions
   end
 

@@ -33,4 +33,4 @@ fr:
       day: "%a"
   time:
     formats:
-      long: "%A %e/%m à %H:%M"
+      long: "%A %e/%m à %kh%M"

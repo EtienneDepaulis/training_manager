@@ -36,6 +36,9 @@ gem 'airbrake'
 
 gem 'icalendar'
 
+# Models
+gem 'draper'
+
 # Forms
 gem 'simple_form'
 

@@ -1,23 +1,15 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2 col-xs-12">
 
-    <h3>
-      <%= current_user %>
-      <small><%= current_user.group %></small>
-    </h3>
-    <hr>
+    <div class="page-header">
+      <h3><%= current_user %>
+      <small><%= current_user.group %></small></h3>
+    </div>
 
 
-      <div class="panel panel-default">
-        <div class="panel-heading">Séances prévues</div>
-        <div class="panel-body">
-
-          <ul id="groups" class="nav nav-pills nav-stacked">
-            <%= render @training_sessions %>
-          </ul>
-
-        </div>
-      </div>
+    <ul id="groups" class="list-group">
+      <%= render @training_sessions %>
+    </ul>
 
   </div>
 </div>
