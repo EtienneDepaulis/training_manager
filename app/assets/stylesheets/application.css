@@ -33,19 +33,8 @@ body {
   margin-bottom: 0;
 }
 
-
-/* https://github.com/Natshah/bootstrap-pull */
-
-@media (min-width: 768px) {
-  /** Pull left sm **/
-  .pull-left-sm {
-    float: left;
-  }
-
-  /** Pull right sm **/
-  .pull-right-sm {
-    float: right;
-  }
+div.right {
+  text-align: right;
 }
 
 div.center {
@@ -110,8 +99,4 @@ div.center {
 
 .row-striped > div.row:nth-of-type(odd) {
   background-color: #f9f9f9;
-}
-
-.col-actions .btn {
-  margin-right: 5px;
 }
