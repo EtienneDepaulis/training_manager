@@ -8,3 +8,5 @@
 //= require select2/select2_locale_fr
 
 //= require invitations
+
+Turbolinks.enableProgressBar();

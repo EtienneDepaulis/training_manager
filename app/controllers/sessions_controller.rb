@@ -2,7 +2,16 @@ class SessionsController < ApplicationController
 
 
 	def new
-		@users = User.all
+
+    if group_id = params[:group_id] and @selected_group = Group.find(group_id)
+      @groups = []
+      @users = @selected_group.users
+    else
+      @users = []
+      @groups = Group.all
+    end
+
+
 	end
 
   def create

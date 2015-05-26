@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
-ruby '2.2.1'
+ruby '2.2.2'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
@@ -14,13 +13,15 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'turbolinks'
 
 # External assets
-gem 'rails-assets-jquery', '2.1.3'
-gem 'rails-assets-jquery-ujs', '1.0.3'
-gem 'rails-assets-jquery-ui', '1.11.2'
-gem 'rails-assets-bootstrap', '3.3.4'
-gem 'rails-assets-bootstrap-switch', '3.3.2'
-gem 'rails-assets-select2', '3.5.2'
-gem 'rails-assets-select2-bootstrap3-css', '1.4.4'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery', '2.1.3'
+  gem 'rails-assets-jquery-ujs', '1.0.3'
+  gem 'rails-assets-jquery-ui', '1.11.2'
+  gem 'rails-assets-bootstrap', '3.3.4'
+  gem 'rails-assets-bootstrap-switch', '3.3.2'
+  gem 'rails-assets-select2', '3.5.2'
+  gem 'rails-assets-select2-bootstrap3-css', '1.4.4'
+end
 
 gem 'responders', '~> 2.0'
 
