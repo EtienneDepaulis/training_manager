@@ -19,6 +19,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ui', '1.11.2'
   gem 'rails-assets-bootstrap', '3.3.4'
   gem 'rails-assets-bootstrap-switch', '3.3.2'
+  gem 'rails-assets-moment', '2.10.3'
+  gem 'rails-assets-bootstrap3-datetimepicker', '4.7.14'
   gem 'rails-assets-select2', '3.5.2'
   gem 'rails-assets-select2-bootstrap3-css', '1.4.4'
 end

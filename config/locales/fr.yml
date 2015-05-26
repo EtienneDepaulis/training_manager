@@ -34,3 +34,4 @@ fr:
   time:
     formats:
       long: "%A %e/%m à %kh%M"
+      datetimepicker: "%d/%m/%y %k:%M"

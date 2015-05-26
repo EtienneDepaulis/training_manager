@@ -2,6 +2,7 @@
  *= require jquery-ui/jquery-ui
  *= require bootstrap
  *= require bootstrap-switch
+ *= require bootstrap3-datetimepicker
  *= require select2
  *= require select2-bootstrap3-css
  *= require_self
