@@ -24,11 +24,11 @@
 
 	<div class="col-xs-12 col-sm-5 col-xs-pull-0 col-sm-pull-3">
 		<% unless user.phone.blank? %>
-			<a href="sms:<%= user.phone %>" class="btn-group"/>
+			<a href="sms:<%= user.phone_formated %>" class="btn-group"/>
 				<button type="button" class="btn btn-success btn-xs">
 					<span class="glyphicon glyphicon-phone"></span>
 				</button>
-				<button type="button" class="btn btn-default btn-xs"><%= user.phone %></button>
+				<button type="button" class="btn btn-default btn-xs"><%= user.phone_formated %></button>
 			</a>
 		<% end %>
 

@@ -3,7 +3,7 @@ class Admin::UsersController  < Admin::ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.order("name ASC").decorate
+    @users = User.all.order("name ASC")
   end
 
   def new

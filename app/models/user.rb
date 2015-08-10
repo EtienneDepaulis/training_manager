@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
 		name
 	end
 
+	def phone_formated
+  	return '' if phone.blank?
+
+		phone.gsub(/\s/, '')
+  end
+
 	private
 		def set_token
 			return if token.present?

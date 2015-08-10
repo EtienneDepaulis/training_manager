@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.3'
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
@@ -39,8 +39,6 @@ gem 'airbrake'
 
 gem 'icalendar'
 
-# Models
-gem 'draper'
 
 # Forms
 gem 'simple_form'
@@ -68,8 +66,10 @@ group :test do
   gem 'shoulda-matchers', require: false
 end
 
+gem 'foreman'
+gem 'puma'
+
 group :production do
-  gem 'unicorn'
   gem 'rails_12factor'
   gem 'heroku-deflater'
 end
