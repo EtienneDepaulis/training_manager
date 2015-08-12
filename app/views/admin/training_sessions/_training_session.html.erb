@@ -1,15 +1,10 @@
 <div id="<%= dom_id(training_session) %>" class="row row-training_session">
 
-	<div class="col-xs-9 col-sm-2 ">
+	<div class="col-xs-9 col-sm-3 ">
 		<strong><%= training_session %></strong>
 	</div>
-	<div class="col-xs-5 col-sm-2 hidden-xs">
-		<% training_session.groups.each do |group| %>
-			<span class="label label-default"><%= group %></span>
-		<% end %>
-	</div>
 
-	<div class="col-xs-3 col-sm-3 col-xs-push-0 col-sm-push-5 col-actions right">
+	<div class="col-xs-3 col-sm-3 col-xs-push-0 col-sm-push-6 col-actions right">
 		<%= link_to edit_admin_training_session_path(training_session), class: "btn btn-default btn-xs" do %>
 	  	<span class="glyphicon glyphicon-pencil"></span>
 	    <span class="hidden-xs">modifier</span>
@@ -19,6 +14,12 @@
 	  	<span class="glyphicon glyphicon-remove"></span>
 	  	<span class="hidden-xs">supprimer</span>
 	  <% end %>
+	</div>
+
+	<div class="col-xs-12 col-sm-6 col-xs-pull-0 col-sm-pull-3">
+		<% training_session.groups.each do |group| %>
+			<span class="label label-default"><%= group %></span>
+		<% end %>
 	</div>
 
 </div>
