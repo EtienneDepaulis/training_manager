@@ -17,7 +17,8 @@ class Admin::UsersController  < Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_users_path, notice: 'Utilisateur créé.'
+      @users = User.all.order("name ASC")
+      render :index
     else
       render action: 'new'
     end
@@ -26,7 +27,8 @@ class Admin::UsersController  < Admin::ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: 'Utilisateur modifié.'
+      @users = User.all.order("name ASC")
+      render :index
     else
       render action: 'edit'
     end
@@ -34,7 +36,8 @@ class Admin::UsersController  < Admin::ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path
+    @users = User.all.order("name ASC")
+    render :index
   end
 
   private
@@ -43,6 +46,6 @@ class Admin::UsersController  < Admin::ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :group_id, :email, :phone)
+      params.require(:user).permit(:name, :email, :phone, group_ids: [])
     end
 end

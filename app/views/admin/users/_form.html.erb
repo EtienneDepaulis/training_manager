@@ -1,7 +1,9 @@
 <%= simple_form_for([:admin, @user], wrapper: :horizontal_form, html: {class: 'form-horizontal'} ) do |f| %>
 
   <%= f.input :name, autofocus: true, label: "Poloïste" %>
-  <%= f.association :group, label: "Equipe", include_blank: false %>
+
+  <%= f.association :groups, wrapper: :horizontal_radio_and_checkboxes, as: :check_boxes, label: "Equipe", required: true %>
+
   <%= f.input :email, label: "Email" %>
   <%= f.input :phone, label: "Téléphone" %>
 

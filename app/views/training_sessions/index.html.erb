@@ -2,8 +2,12 @@
   <div class="col-md-8 col-md-offset-2 col-xs-12">
 
     <div class="page-header">
-      <h3><%= current_user %>
-      <small><%= current_user.group %></small></h3>
+      <h3>
+      	<%= current_user %>
+	      <% current_user.groups.each do |group| %>
+	      	<small><%= group %></small>
+	    	<% end %>
+			</h3>
     </div>
 
 

@@ -32,6 +32,7 @@ RSpec.describe TrainingSession, type: :model do
 		it "creates the invitations" do
 			expect{
 				training_session.groups << group
+				training_session.update_invitations
 			}.to change(user_1.invitations, :count).by(1)
 		end
 

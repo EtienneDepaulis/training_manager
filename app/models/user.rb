@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
 
 	include Filterable
 
-	has_many :memberships, dependent: :destroy
+	has_many :memberships, dependent: :destroy, inverse_of: :user
 	has_many :groups, through: :memberships
+	accepts_nested_attributes_for :memberships, allow_destroy: true, reject_if: :all_blank
 
 	has_many :invitations, dependent: :destroy
   has_many :training_sessions, through: :invitations
@@ -12,6 +13,8 @@ class User < ActiveRecord::Base
 
 	before_create :set_token
 	after_save :update_invitations
+
+	scope :for_groups, ->(groups) { joins(:memberships).where(memberships: {group: groups}).distinct }
 
 	def to_s
 		name

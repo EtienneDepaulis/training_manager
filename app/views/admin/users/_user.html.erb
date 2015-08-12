@@ -4,9 +4,9 @@
 		<strong><%= user %></strong>
 	</div>
 	<div class="col-xs-5 col-sm-2 hidden-xs">
-		<span class="label label-default">
-			<%= user.group %>
-		</span>
+		<% user.groups.each do |group| %>
+      <span class="label label-default"><%= group %></span>
+    <% end %>
 	</div>
 
 	<div class="col-xs-3 col-sm-3 col-xs-push-0 col-sm-push-5 col-actions right">
