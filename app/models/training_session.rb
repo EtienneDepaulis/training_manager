@@ -14,6 +14,7 @@ class TrainingSession < ActiveRecord::Base
   validates_presence_of :location, :started_at
 
   scope :in_the_past, ->{ where("started_at < ?", Date.today) }
+  scope :for_groups, ->(groups) { joins(:allowances).where(allowances: {group: groups}).distinct }
 
   def to_s
     I18n.l started_at, format: :long

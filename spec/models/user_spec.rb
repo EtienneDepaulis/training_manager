@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 	it { is_expected.to validate_presence_of(:name) }
 
-	it { is_expected.to belong_to(:group) }
-	it { is_expected.to validate_presence_of(:group) }
-
 	it { is_expected.to have_many(:invitations).dependent(:destroy) }
 	it { is_expected.to have_many(:training_sessions) }
+
+	it { is_expected.to have_many(:memberships).dependent(:destroy) }
+	it { is_expected.to have_many(:groups) }
 
 	it "has a valid factory" do
 		expect(build(:user)).to be_valid
@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
 			end
 
 			it "creates the invitations" do
-				user.group = @group
+				user.groups << @group
 				expect{
 					user.save
 				}.to change(Invitation, :count).by(1)
@@ -65,12 +65,16 @@ RSpec.describe User, type: :model do
 			  @group.training_sessions << @training_session_1
 			  @new_group.training_sessions << @training_session_2
 
-			  @user = create :user, group: @group
+			  @user = create :user
+			  @user.groups << @group
 			end
 
 			it "update invitations based on the new group" do
-				@user.group = @new_group
-				@user.save
+				@user.groups.delete(@group)
+				@user.groups << @new_group
+
+				@user.update_invitations
+
 				@user.training_sessions.reload
 
 				expect(@user.training_sessions.size).to eq 1

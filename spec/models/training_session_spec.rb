@@ -18,10 +18,16 @@ RSpec.describe TrainingSession, type: :model do
 
 	context 'creating a training_session' do
 		let(:group) 						{ create :group }
-		let!(:user_1) 					{ create :user, group: group }
-		let!(:user_2) 					{ create :user, group: group }
-		let!(:user_3) 					{ create :user, group: group }
+		let(:user_1) 						{ create :user }
+		let(:user_2) 						{ create :user }
+		let(:user_3) 						{ create :user }
 		let(:training_session) 	{ create :training_session }
+
+		before do
+		  user_1.groups << group
+		  user_2.groups << group
+		  user_3.groups << group
+		end
 
 		it "creates the invitations" do
 			expect{

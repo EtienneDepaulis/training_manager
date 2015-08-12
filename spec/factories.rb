@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :user do
-    association             :group
     sequence(:name)  		    {|i| "user ##{i}"}
     sequence(:email)        {|i| "user-#{i}@gmail.com"}
     sequence(:token)        {|i| "token ##{i}"}
@@ -32,5 +31,10 @@ FactoryGirl.define do
   factory :invitation do
     association             :user
     association             :training_session
+  end
+
+  factory :membership do
+    association             :group
+    association             :user
   end
 end

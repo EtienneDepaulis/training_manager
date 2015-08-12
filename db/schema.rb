@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815115929) do
+ActiveRecord::Schema.define(version: 20150812081736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "allowances", force: true do |t|
+  create_table "allowances", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "training_session_id"
     t.datetime "created_at"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20140815115929) do
   add_index "allowances", ["group_id"], name: "index_allowances_on_group_id", using: :btree
   add_index "allowances", ["training_session_id"], name: "index_allowances_on_training_session_id", using: :btree
 
-  create_table "groups", force: true do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.datetime "created_at"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20140815115929) do
 
   add_index "groups", ["parent_id"], name: "index_groups_on_parent_id", using: :btree
 
-  create_table "invitations", force: true do |t|
+  create_table "invitations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "training_session_id"
     t.datetime "created_at"
@@ -47,13 +47,23 @@ ActiveRecord::Schema.define(version: 20140815115929) do
   add_index "invitations", ["training_session_id"], name: "index_invitations_on_training_session_id", using: :btree
   add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
 
-  create_table "locations", force: true do |t|
+  create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "training_sessions", force: true do |t|
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
+  create_table "training_sessions", force: :cascade do |t|
     t.text     "description"
     t.datetime "started_at"
     t.integer  "location_id"
@@ -63,18 +73,18 @@ ActiveRecord::Schema.define(version: 20140815115929) do
 
   add_index "training_sessions", ["location_id"], name: "index_training_sessions_on_location_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "group_id"
     t.string   "token"
     t.boolean  "is_admin",   default: false
   end
 
-  add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
   add_index "users", ["token"], name: "index_users_on_token", using: :btree
 
+  add_foreign_key "memberships", "groups"
+  add_foreign_key "memberships", "users"
 end

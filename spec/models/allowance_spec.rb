@@ -24,7 +24,8 @@ RSpec.describe Allowance, type: :model do
 			before(:each) do
 			  @group = create :group
 			  @another_group = create :group
-			  @user = create :user, group: @group
+			  @user = create :user
+			  @user.groups << @group
 
 			  @training_session = create :training_session
 			end
@@ -48,7 +49,8 @@ RSpec.describe Allowance, type: :model do
 			before(:each) do
 			  @group = create :group
 			  @another_group = create :group
-			  @user = create :user, group: @group
+			  @user = create :user
+			  @user.groups << @group
 
 			  @training_session = create :training_session
 			  @allowance = create :allowance, group: @group, training_session: @training_session
