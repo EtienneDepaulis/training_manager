@@ -9,5 +9,7 @@ $(document).on 'ready page:load', ->
     offColor: "danger"
     size: "small"
 
+  $("input.invitation-switch-unanswered").bootstrapSwitch('offColor', 'default').bootstrapSwitch('labelText', 'Oui')
+
   $("input.invitation-switch").on "switchChange.bootstrapSwitch", (event, state) ->
     $(this).parent().submit()

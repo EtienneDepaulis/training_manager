@@ -3,7 +3,7 @@ class Admin::UsersController  < Admin::ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all.order("name ASC")
+    load_users
   end
 
   def new
@@ -17,8 +17,7 @@ class Admin::UsersController  < Admin::ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      @users = User.all.order("name ASC")
-      render :index
+      load_and_render_index
     else
       render action: 'new'
     end
@@ -27,8 +26,7 @@ class Admin::UsersController  < Admin::ApplicationController
 
   def update
     if @user.update(user_params)
-      @users = User.all.order("name ASC")
-      render :index
+      load_and_render_index
     else
       render action: 'edit'
     end
@@ -36,11 +34,21 @@ class Admin::UsersController  < Admin::ApplicationController
 
   def destroy
     @user.destroy
-    @users = User.all.order("name ASC")
-    render :index
+
+    load_and_render_index
   end
 
   private
+
+    def load_users
+      @users = User.all.order("name ASC")
+    end
+
+    def load_and_render_index
+      load_users
+      render :index, change: "users"
+    end
+
     def set_user
       @user = User.find(params[:id])
     end

@@ -6,11 +6,10 @@ gem 'rails', '4.2.3'
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
-gem 'jbuilder', '~> 2.0'
 
 gem 'sass-rails', '~> 4.0'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'turbolinks'
+gem 'turbolinks', github: 'rails/turbolinks'
 
 # External assets
 source 'https://rails-assets.org' do
@@ -26,8 +25,6 @@ source 'https://rails-assets.org' do
 end
 
 gem 'responders', '~> 2.0'
-
-gem 'active_model_serializers', '~>0.9.3'
 
 gem "rack-cors", require: "rack/cors"
 

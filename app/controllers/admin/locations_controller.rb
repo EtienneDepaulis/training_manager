@@ -3,7 +3,7 @@ class Admin::LocationsController  < Admin::ApplicationController
   before_action :set_location, only: [:edit, :update]
 
   def index
-    @locations = Location.all.order("name ASC")
+    load_locations
   end
 
   def new
@@ -17,22 +17,31 @@ class Admin::LocationsController  < Admin::ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to admin_locations_path, notice: 'Lieu créé.'
+      load_and_render_index
     else
       render action: 'new'
     end
-
   end
 
   def update
     if @location.update(location_params)
-      redirect_to admin_locations_path, notice: 'Lieu modifié.'
+      load_and_render_index
     else
       render action: 'edit'
     end
   end
 
   private
+
+    def load_locations
+      @locations = Location.all.order("name ASC")
+    end
+
+    def load_and_render_index
+      load_locations
+      render :index, change: "locations"
+    end
+
     def set_location
       @location = Location.find(params[:id])
     end

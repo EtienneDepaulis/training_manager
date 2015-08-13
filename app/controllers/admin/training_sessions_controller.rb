@@ -3,7 +3,7 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
   before_action :set_training_session, only: [:edit, :update, :destroy]
 
   def index
-    @training_sessions = TrainingSession.all.order("started_at ASC")
+    load_training_sessions
   end
 
   def new
@@ -14,11 +14,10 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
     @training_session = TrainingSession.new(training_session_params)
 
     if @training_session.save
-      redirect_to admin_training_sessions_path, notice: 'Entrainement crée.'
+      load_and_render_index
     else
       render action: 'new'
     end
-
   end
 
   def edit
@@ -26,7 +25,7 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
 
   def update
     if @training_session.update(training_session_params)
-      redirect_to admin_training_sessions_path, notice: 'Entrainement modifié.'
+      load_and_render_index
     else
       render action: 'edit'
     end
@@ -34,10 +33,21 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
 
   def destroy
     @training_session.destroy
-    redirect_to admin_training_sessions_path
+
+    load_and_render_index
   end
 
   private
+
+    def load_training_sessions
+      @training_sessions = TrainingSession.all.order("started_at ASC")
+    end
+
+    def load_and_render_index
+      load_training_sessions
+      render :index, change: "training_sessions"
+    end
+
     def set_training_session
       @training_session = TrainingSession.find(params[:id])
     end

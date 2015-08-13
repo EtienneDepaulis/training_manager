@@ -39,9 +39,39 @@
 
         <h5>Invitations </h5>
 
-          <ul class="list-group">
-            <%= render @training_session.invitations %>
-          </ul>
+        <ul class="list-group">
+          <%= render @training_session.invitations %>
+        </ul>
+
+
+        <p>
+          Envoyer un SMS à ceux qui :
+
+          <a class="btn-group" href="sms:<%= @users_who_did_not_answer.join(",") %>">
+            <button type="button" class="btn btn-success btn-xs">
+              <span class="glyphicon glyphicon-phone"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-xs">n'ont pas répondu</button>
+          </a>
+
+          <a class="btn-group" href="sms:<%= @users_who_confirmed.join(",") %>">
+            <button type="button" class="btn btn-success btn-xs">
+              <span class="glyphicon glyphicon-phone"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-xs">viennent</button>
+          </a>
+
+
+          <a class="btn-group" href="sms:<%= @all_users.join(",") %>">
+            <button type="button" class="btn btn-success btn-xs">
+              <span class="glyphicon glyphicon-phone"></span>
+            </button>
+            <button type="button" class="btn btn-default btn-xs">sont invités (tout le monde)</button>
+          </a>
+
+
+
+        </p>
 
       </div>
 

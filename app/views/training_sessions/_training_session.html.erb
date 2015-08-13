@@ -13,7 +13,7 @@
     <% invitation = training_session.invitations.for_user(current_user).first %>
 
     <%= simple_form_for(invitation, url: invitation_path(invitation), remote: true, html: {method: :patch} ) do |f| %>
-      <%= f.input_field :is_confirmed, class: "invitation-switch" %>
+      <%= f.input_field :is_confirmed, class: "invitation-switch #{ "invitation-switch-unanswered" unless f.object.is_answered? }" %>
     <% end  %>
   </div>
 

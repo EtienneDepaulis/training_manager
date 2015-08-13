@@ -3,7 +3,7 @@ class Admin::GroupsController  < Admin::ApplicationController
   before_action :set_group, only: [:edit, :update]
 
   def index
-    @groups = Group.all.order("name ASC")
+    load_groups
   end
 
   def new
@@ -17,7 +17,7 @@ class Admin::GroupsController  < Admin::ApplicationController
     @group = Group.new(group_params)
 
     if @group.save
-      redirect_to admin_groups_path, notice: 'Equipe créée.'
+      load_and_render_index
     else
       render action: 'new'
     end
@@ -26,13 +26,23 @@ class Admin::GroupsController  < Admin::ApplicationController
 
   def update
     if @group.update(group_params)
-      redirect_to admin_groups_path, notice: 'Equipe modifiée.'
+      load_and_render_index
     else
       render action: 'edit'
     end
   end
 
   private
+
+    def load_groups
+      @groups = Group.all.order("name ASC")
+    end
+
+    def load_and_render_index
+      load_groups
+      render :index, change: "groups"
+    end
+
     def set_group
       @group = Group.find(params[:id])
     end

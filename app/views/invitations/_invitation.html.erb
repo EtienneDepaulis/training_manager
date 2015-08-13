@@ -9,7 +9,7 @@
     <span class="pull-right label label-default">?</span>
   <% end %>
   <small class="pull-right" style="padding-right: 10px;">
-    <%= l invitation.updated_at, format: :long %>
+    <%= l invitation.updated_at, format: :long if invitation.is_answered? %>
   </small>
   <%= invitation.user %>
 </a>

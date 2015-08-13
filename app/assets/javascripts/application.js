@@ -13,4 +13,4 @@
 //= require invitations
 //= require training_sessions
 
-Turbolinks.enableProgressBar();
+Turbolinks.ProgressBar.disable();
