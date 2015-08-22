@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
 
     if group_id = params[:group_id] and @selected_group = Group.find(group_id)
       @groups = []
-      @users = @selected_group.users
+      @users = @selected_group.users.order("name ASC")
     else
       @users = []
-      @groups = Group.all
+      @groups = Group.all.order("name ASC")
     end
 
 
