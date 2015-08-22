@@ -2,7 +2,7 @@
 
   <%= f.input :name, autofocus: true, label: "Poloïste" %>
 
-  <%= f.association :groups, wrapper: :horizontal_radio_and_checkboxes, as: :check_boxes, label: "Equipe", required: true %>
+  <%= f.association :groups, collection: Group.all.order("name ASC"), wrapper: :horizontal_radio_and_checkboxes, as: :check_boxes, label: "Equipe", required: true %>
 
   <%= f.input :email, label: "Email" %>
   <%= f.input :phone, label: "Téléphone" %>

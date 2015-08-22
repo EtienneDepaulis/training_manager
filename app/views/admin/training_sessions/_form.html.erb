@@ -2,9 +2,9 @@
 
   <%= f.input :started_at, as: :string, label: "Quand ?", input_html: {class: "datetimepicker"}, input_html: {value: I18n.localize(f.object.started_at, format: :datetimepicker)}  %>
 
-  <%= f.association :location, label: "Où ?", include_blank: false %>
+  <%= f.association :location, collection: Location.all.order("name ASC"), label: "Où ?", include_blank: false %>
 
-  <%= f.association :groups, wrapper: :horizontal_radio_and_checkboxes, as: :check_boxes, label: "Qui ?", required: true %>
+  <%= f.association :groups, collection: Group.all.order("name ASC"), wrapper: :horizontal_radio_and_checkboxes, as: :check_boxes, label: "Qui ?", required: true %>
 
   <%= f.input :description, label: "Programme" %>
 
