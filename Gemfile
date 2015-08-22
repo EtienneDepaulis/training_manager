@@ -64,7 +64,6 @@ group :test do
   gem 'capybara'
 end
 
-gem 'foreman'
 gem 'puma'
 
 group :production do
