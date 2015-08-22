@@ -15,8 +15,9 @@ class TrainingSession < ActiveRecord::Base
 
   after_save :update_invitations
 
-  scope :in_the_past, ->{ where("started_at < ?", Date.today) }
-  scope :for_groups, ->(groups) { joins(:allowances).where(allowances: {group: groups}).distinct }
+  scope :in_the_past,   ->{ where("started_at < ?", Date.today) }
+  scope :to_come,       ->{ where("started_at >= ?", Date.today) }
+  scope :for_groups,    ->(groups) { joins(:allowances).where(allowances: {group: groups}).distinct }
 
   def to_s
     I18n.l started_at, format: :long

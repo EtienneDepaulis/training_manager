@@ -3,7 +3,7 @@ class TrainingSessionsController < ApplicationController
   before_filter :authenticate_user!
 
 	def index
-		@training_sessions = current_user.training_sessions
+		@training_sessions = current_user.training_sessions.to_come.order("started_at ASC")
 	end
 
   def show
