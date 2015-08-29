@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :invitations, only: [:update]
   resources :sessions, only: [:new, :create, :destroy]
 
+  get "/login" => redirect("/sessions/new")
+
   root to: 'training_sessions#index'
 
 end

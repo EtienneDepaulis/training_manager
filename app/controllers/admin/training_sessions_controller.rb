@@ -7,7 +7,7 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
   end
 
   def new
-    @training_session = TrainingSession.new started_at: Time.now
+    @training_session = TrainingSession.new started_at: Date.today.to_time.change({hour: 20, min: 30})
   end
 
   def create
@@ -40,7 +40,7 @@ class Admin::TrainingSessionsController  < Admin::ApplicationController
   private
 
     def load_training_sessions
-      @training_sessions = TrainingSession.all.order("started_at ASC")
+      @training_sessions = TrainingSession.to_come.order("started_at ASC")
     end
 
     def load_and_render_index

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150812091909) do
   add_index "allowances", ["training_session_id"], name: "index_allowances_on_training_session_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150812091909) do
   add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,13 +71,13 @@ ActiveRecord::Schema.define(version: 20150812091909) do
   add_index "training_sessions", ["location_id"], name: "index_training_sessions_on_location_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "phone"
-    t.string   "email"
+    t.string   "name",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "email",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "token"
-    t.boolean  "is_admin",   default: false
+    t.string   "token",      limit: 255
+    t.boolean  "is_admin",               default: false
   end
 
   add_index "users", ["token"], name: "index_users_on_token", using: :btree
