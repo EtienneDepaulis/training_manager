@@ -20,12 +20,14 @@
   <%= training_session %><br />
   <span class="label label-primary"><%= training_session.location %></span>
 
-  <span class="hidden-xs">
-    <% training_session.allowances.each do |allowance| %>
-      <span class="label label-default"><%= allowance %></span>
-    <% end %>
-  </span>
+
+  <% training_session.allowances.each do |allowance| %>
+    <span class="label label-default"><%= allowance %></span>
+  <% end %>
 
   <span class="label label-success"><span class="is_expected_counter"><%= training_session.is_expected_counter %></span> <i class="glyphicon glyphicon-user"></i></span>
+
+
+
 
 </li>
