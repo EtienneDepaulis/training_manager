@@ -8,6 +8,7 @@ class TrainingSessionsController < ApplicationController
 
   def show
     @training_session = current_user.training_sessions.find params[:id]
+    @invitations = @training_session.invitations.order("is_answered DESC, is_confirmed DESC, updated_at ASC")
 
     @users_who_did_not_answer = @training_session.invitations.has_not_answered.joins(:user).pluck(:phone)
 
