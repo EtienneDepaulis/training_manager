@@ -5,6 +5,11 @@
 	</div>
 
 	<div class="col-xs-3 col-sm-3 col-xs-push-0 col-sm-push-6 col-actions right">
+		<%= link_to admin_training_session_duplicates_path(training_session), method: :post, class: "btn btn-success btn-xs" do %>
+	  	<span class="glyphicon glyphicon-retweet"></span>
+	    <span class="hidden-xs">copier</span>
+	  <% end %>
+
 		<%= link_to edit_admin_training_session_path(training_session), class: "btn btn-default btn-xs" do %>
 	  	<span class="glyphicon glyphicon-pencil"></span>
 	    <span class="hidden-xs">modifier</span>

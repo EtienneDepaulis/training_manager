@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     resources :users, except: :show
     resources :locations, except: [:show, :destroy]
     resources :groups, except: [:show, :destroy]
-    resources :training_sessions
+    resources :training_sessions do
+      scope module: "training_sessions" do
+        resources :duplicates, only: :create
+      end
+    end
   end
 
   resources :training_sessions, only: [:show]
