@@ -14,9 +14,10 @@ class DuplicateTrainingSession
 		new_training_session = training_session.dup
 
 		new_training_session.started_at = training_session.started_at + 7.days
-		new_training_session.save
 
 		new_training_session.groups << training_session.groups
+
+		new_training_session.save
 
 		new_training_session
 	end
