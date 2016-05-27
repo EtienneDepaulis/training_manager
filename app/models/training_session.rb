@@ -40,7 +40,10 @@ class TrainingSession < ActiveRecord::Base
     futur_users = User.for_groups(groups)
 
     users_to_add = futur_users - current_users
-    self.users << users_to_add
+    users_to_add.each do |user|
+      invitations.create(user: user)
+    end
+    # self.users << users_to_add
 
     users_to_remove = current_users - futur_users
     self.invitations.where(user: users_to_remove).destroy_all

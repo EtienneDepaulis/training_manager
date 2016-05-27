@@ -31,7 +31,10 @@ class User < ActiveRecord::Base
 		futur_training_sessions = TrainingSession.for_groups(groups)
 
 		training_sessions_to_add = futur_training_sessions - current_training_sessions
-		self.training_sessions << training_sessions_to_add
+		training_sessions_to_add.each do |training_session|
+			self.invitations.create(training_session: training_session)
+		end
+		# self.training_sessions << training_sessions_to_add
 
 		training_sessions_to_remove = current_training_sessions - futur_training_sessions
 		self.invitations.where(training_session: training_sessions_to_remove).destroy_all

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   namespace :users do
     get '/:token/invitations', to: 'invitations#index', as: :user_invitations
   end

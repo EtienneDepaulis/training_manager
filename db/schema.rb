@@ -21,10 +21,9 @@ ActiveRecord::Schema.define(version: 20150812091909) do
     t.integer  "training_session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["group_id"], name: "index_allowances_on_group_id", using: :btree
+    t.index ["training_session_id"], name: "index_allowances_on_training_session_id", using: :btree
   end
-
-  add_index "allowances", ["group_id"], name: "index_allowances_on_group_id", using: :btree
-  add_index "allowances", ["training_session_id"], name: "index_allowances_on_training_session_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -39,10 +38,9 @@ ActiveRecord::Schema.define(version: 20150812091909) do
     t.datetime "updated_at"
     t.boolean  "is_answered",         default: false
     t.boolean  "is_confirmed",        default: false
+    t.index ["training_session_id"], name: "index_invitations_on_training_session_id", using: :btree
+    t.index ["user_id"], name: "index_invitations_on_user_id", using: :btree
   end
-
-  add_index "invitations", ["training_session_id"], name: "index_invitations_on_training_session_id", using: :btree
-  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -55,10 +53,9 @@ ActiveRecord::Schema.define(version: 20150812091909) do
     t.integer  "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
-
-  add_index "memberships", ["group_id"], name: "index_memberships_on_group_id", using: :btree
-  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
 
   create_table "training_sessions", force: :cascade do |t|
     t.text     "description"
@@ -66,9 +63,8 @@ ActiveRecord::Schema.define(version: 20150812091909) do
     t.integer  "location_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["location_id"], name: "index_training_sessions_on_location_id", using: :btree
   end
-
-  add_index "training_sessions", ["location_id"], name: "index_training_sessions_on_location_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -78,9 +74,8 @@ ActiveRecord::Schema.define(version: 20150812091909) do
     t.datetime "updated_at"
     t.string   "token",      limit: 255
     t.boolean  "is_admin",               default: false
+    t.index ["token"], name: "index_users_on_token", using: :btree
   end
-
-  add_index "users", ["token"], name: "index_users_on_token", using: :btree
 
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"

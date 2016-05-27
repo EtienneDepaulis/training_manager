@@ -1,7 +1,6 @@
 //= require jquery
 //= require jquery-ujs
 //= require jquery-ui/jquery-ui
-//= require turbolinks
 //= require moment
 //= require moment/locale/fr.js
 //= require bootstrap
