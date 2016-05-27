@@ -22,22 +22,5 @@ module TrainingManager
     config.i18n.default_locale = :fr
 
     config.assets.enabled = false
-
-    config.middleware.use Rack::Cors do
-      allow do
-        origins "*"
-
-        resource "*",
-          :headers => :any,
-          :methods => [:get, :post, :put, :delete, :options, :patch]
-        end
-
-      allow do
-        origins "*"
-        resource "/public/*",
-          :headers => :any,
-          :methods => :get
-      end
-    end
   end
 end
