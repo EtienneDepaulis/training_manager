@@ -38,6 +38,15 @@ group :development do
   gem 'spring'
 end
 
+gem 'memcachier'
+gem 'dalli'
+# Fast IO for memcache
+gem 'kgio'
+
+# Serve static assets through Rack + Memcache
+# https://devcenter.heroku.com/articles/rack-cache-memcached-rails31
+gem 'rack-cache'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
