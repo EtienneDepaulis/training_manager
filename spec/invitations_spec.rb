@@ -14,7 +14,7 @@ RSpec.describe "managing invitations", type: :feature do
     it "can answer invitation" do
       sign_in_with user
 
-      expect(page).to have_content(training_session)
+      expect(page).to have_content("mardi 14/08 à 0h00")
     end
   end
 
