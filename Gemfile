@@ -52,6 +52,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'guard-rspec'
   gem 'pry-rails'
+  gem 'rspec_junit_formatter'
 end
 
 group :test do
