@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.7.3-node-browsers
         environment:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres@127.0.0.1:5432/db_name
